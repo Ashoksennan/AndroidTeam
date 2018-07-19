@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="car_opened">Incoming Call</string>
+    <string name="newcall">Incoming Call</string>
+</resources>
