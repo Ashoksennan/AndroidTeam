@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_corners"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Response"
+        android:src="@drawable/ic_success"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:minHeight="80dp"
+        android:minWidth="80dp"
+        android:id="@+id/iv_res"
+
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Success"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_title"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="upload"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_desc"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/btn_ok"
+        />
+</LinearLayout>

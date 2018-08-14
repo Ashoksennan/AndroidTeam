@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/rootlayout"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="5dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:id="@+id/ptc_ll_input">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_district"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_district"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="true"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/georgia"
+                        android:hint="District"
+                        android:inputType="none"
+                        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/fragment_body_text_size"
+                        android:textStyle="italic"
+                        android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_panchayat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/input_panchayat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="true"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/georgia"
+                        android:hint="Panchayat"
+                        android:inputType="none"
+                        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/fragment_body_text_size"
+                        android:textStyle="italic"
+                        android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_building_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/input_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:hint="Building Location"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/fragment_body_text_size"
+                            android:textStyle="italic"
+                            android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_buildingusage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/input_building_usage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:hint="Building Usage"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/fragment_body_text_size"
+                            android:textStyle="italic"
+
+                            android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_building_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/input_buildingtype"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:hint="Building Type"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/fragment_body_text_size"
+                            android:textStyle="italic"
+
+                            android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_totalarea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/input_totalarea"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:hint="Total Area"
+                            android:inputType="number"
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/fragment_body_text_size"
+                            android:textStyle="italic"
+
+                            android:gravity="start" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:id="@+id/ptc_ll_btn_controls">
+
+                <Button
+                    style="@style/Widget.AppCompat.ButtonBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="@color/buttonBackgroundColor"
+                    android:fontFamily="@font/georgia"
+                    android:text="Generate"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fragment_body_text_size"
+                    android:textStyle="italic|bold"
+                    android:onClick="generateCalculation"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="@color/buttonBackgroundColor"
+                    android:fontFamily="@font/georgia"
+                    android:text="Reset"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fragment_body_text_size"
+                    android:textStyle="italic|bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/ptc_ll_output">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Zone"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvZone"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Building Usage"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvBuildingUsage"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Tax Rate(Zone X Usage)(per Sq.Ft)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvTaxRate"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Monthly Rental value (Building Area X Zone Basic Value)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvMonthlyRental"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Annual Rental Value (Monthly Rental value X 12)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvAnnualRental"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Plot Value (Annual Rental Value X (1/6))"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvPlotValue"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Building Value (Annual Rental Value - Plot Value)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvBuildingValue"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Maintenance Of Building (10% of Building Value)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvMaintenanceBuilding"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Basic Value (Annual Rental Value - Maintenance Of Building)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_BasicRental"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Discount for Building Age
+                                              Upto 5 Years - 0% of Basic Value
+                                              06 To 15 Years - 10% of Basic Value
+                                              16 To 25 Years - 15% of Basic Value
+                                              Above 25 Years - 20% of Basic Value"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvDiscountAge"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Discount for Building Type
+                                              Rcc Roof - 1% of Basic Value
+                                              Thatched Roof - 4% of Basic Value
+                                              Madras Terrace - 5% of Basic Value
+                                              Tiled - 6% of Basic Value
+                                              Zinc Sheet - 7% of Basic Value"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvDiscountType"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Annual Value (Basic Value - (Age Discount + Type Discount))"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvAnnualValue"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="General Tax (Annual Value X 10%)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvGeneralTax"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Library Cess (General Tax X 10%)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvLibCess"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Education Tax (Annual Value X 0%)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEducationTax"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Property Tax (General Tax + Library Cess + Education Tax)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvPropertytax"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Total Tax (Property Tax + Pentalty)"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvTotalTax"
+                                style="@style/TextAppearance.TaxCalculator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:text="Zone"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

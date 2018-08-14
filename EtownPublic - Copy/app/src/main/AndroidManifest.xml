@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="chennaicitytrafficapplication.prematix.com.etownpublic">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:theme="@style/splashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.RootNavigation"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".activity.Shared_Modules.Shared_Common_All_Tax.TrackNewAssessmentNo"  android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Common_All_Tax.ViewDcb"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Property.PaidHistory"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Common_All_Tax.Shared_PaymentHistory"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Common_All_Tax.Shared_AssessmentSearch"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Property.AssessmentSearch"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.WaterTax.Water_AssessmentSearch_Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Common_All_Tax.ViewTracking"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".activity.Shared_Modules.Shared_Common_All_Tax.MakePayment"></activity>
+
+
+        <activity
+            android:name=".activity.Birth_Modules.BirthRegistration_Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Birth_Modules.TrackBirthRegistration_Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Death_Modules.TrackDeathRegistration_Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.Death_Modules.DeathRegistration_Activity"
+            android:parentActivityName=".HomeActivity" />
+
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Birth_Death.BirthCertificateSearch_Activity"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activity.Shared_Modules.Shared_Birth_Death.BirthAbstract_Activity"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity
+            android:name=".activity.NonTax.NewAssessment"
+            android:parentActivityName=".HomeActivity" />
+
+        <activity
+            android:name=".activity.Grievances.Grievances_Registration"
+            android:parentActivityName=".HomeActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activity.Grievances.Grievances_Track"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".activity.ContactUs"
+            android:parentActivityName=".HomeActivity" />
+
+        <activity android:name=".activity.Property.PropertyTaxCalculator_Activity" android:parentActivityName=".HomeActivity"/>
+        <!-- Broadcast receiver declaration in manifest file and make sure to enable it -->
+        <receiver
+            android:name=".Network_Connection_BroadCast.InternetConnector_Receiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
