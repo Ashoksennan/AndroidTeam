@@ -90,8 +90,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_home);
+ setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreference = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -120,10 +119,9 @@ public class HomeActivity extends AppCompatActivity
 
         if (!sharedPreference.getString(PREF_SELECTDISTRICT, "").isEmpty())
             tv_selectDistrict.setText(sharedPreference.getString(PREF_SELECTDISTRICT, ""));
-        else tv_selectDistrict.setText(R.string.select_district);
+
         if (!sharedPreference.getString(PREF_SELECTPANCHAYAT, "").isEmpty())
             tv_selectPanchayat.setText(sharedPreference.getString(PREF_SELECTPANCHAYAT, ""));
-        else tv_selectPanchayat.setText(R.string.select_panchayat);
         tv_selectPanchayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

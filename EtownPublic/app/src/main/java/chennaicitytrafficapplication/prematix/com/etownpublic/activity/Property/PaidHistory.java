@@ -222,6 +222,8 @@ public class PaidHistory extends AppCompatActivity {
             public void onClick(View v) {
                 mPanchayatList.clear();
 
+                etPanchayat.setText("");
+
                 medittext_Taxno.setEnabled(false);
 
                 etPanchayat.setText("");
@@ -521,6 +523,10 @@ public class PaidHistory extends AppCompatActivity {
 
                     String recordsetsarray = response.getString("recordsets");
 
+
+
+
+
                     JSONArray jsonArray = new JSONArray(recordsetsarray);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -578,6 +584,8 @@ public class PaidHistory extends AppCompatActivity {
                         } else {
                             mLinear_Userdata.setVisibility(View.GONE);
                             Snackbar.make(rootlayout, "No data found", Snackbar.LENGTH_SHORT).show();
+                            mTaxBalancePayment.clear();
+                            paidHostoryAdapter.notifyDataSetChanged();
 
                         }
 
@@ -586,6 +594,7 @@ public class PaidHistory extends AppCompatActivity {
 
 
                     waitingDialog.dismiss();
+
 
 
                 } catch (JSONException e) {

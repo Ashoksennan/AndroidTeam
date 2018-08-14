@@ -247,8 +247,11 @@ public class Shared_AssessmentSearch extends AppCompatActivity {
             @Override
             public void onClick(String item, int position) {
 
+                 etDistrict.setText("");
+
                 etDistrict.setText(item);
 
+                etPanchayat.setText("");
 
                 for (Map.Entry<Integer, String> entry : mDistrictHashmapitems.entrySet()) {
 
@@ -272,9 +275,6 @@ public class Shared_AssessmentSearch extends AppCompatActivity {
                 mPanchayatList.clear();
 
                 medittext_Taxno.setEnabled(false);
-
-                etPanchayat.setText("");
-                etDistrict.setText("");
 
                 spinnerDialogDistrict.showSpinerDialog();
 
@@ -732,6 +732,8 @@ public class Shared_AssessmentSearch extends AppCompatActivity {
                         } else {
                             mLinear_Userdata.setVisibility(View.GONE);
                             Snackbar.make(rootlayout, "No data found", Snackbar.LENGTH_SHORT).show();
+                            mTaxBalancePayment.clear();
+                            prof_assessmentAdapter.notifyDataSetChanged();
 
                         }
 

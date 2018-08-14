@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-
 import android.widget.LinearLayout;
 
 import chennaicitytrafficapplication.prematix.com.etownpublic.Network_Connection_BroadCast.InternetConnector_Receiver;
@@ -46,8 +44,8 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
+        setContentView(R.layout.activity_splash);
 
         rootlayout = findViewById(R.id.rootlayout);
         checkRunTimePermission();

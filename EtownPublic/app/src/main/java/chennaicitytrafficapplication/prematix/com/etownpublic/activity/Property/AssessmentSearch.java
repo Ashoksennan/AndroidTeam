@@ -131,8 +131,10 @@ public class AssessmentSearch extends AppCompatActivity {
         spinnerDialogDistrict.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
+                
                 etDistrict.setText(item);
 
+                etPanchayat.setText("");
 
                 for (Map.Entry<Integer, String> entry : mDistrictHashmapitems.entrySet()) {
 
@@ -152,6 +154,7 @@ public class AssessmentSearch extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 spinnerDialogDistrict.showSpinerDialog();
+
                 panchayat_items.clear();
                 edTaxNo.setEnabled(false);
 
@@ -481,6 +484,8 @@ public class AssessmentSearch extends AppCompatActivity {
                                 } else {
 
                                     Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
+                                    assessment_search_bean.clear();
+                                    assessmentAdapter.notifyDataSetChanged();
 
 
                                     llBalance.setVisibility(View.GONE);
@@ -507,6 +512,8 @@ public class AssessmentSearch extends AppCompatActivity {
                                 } else {
 
                                     Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
+                                    assessment_search_bean.clear();
+                                    assessmentAdapter.notifyDataSetChanged();
 
                                     llBalance.setVisibility(View.GONE);
                                 }

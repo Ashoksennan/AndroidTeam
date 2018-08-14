@@ -86,6 +86,7 @@
     <string name="err_msg_buildingtype">Enter Building Type</string>
     <string name="err_msg_totalarea">Enter Total Area</string>
     <string name="err_msg_blocation">Enter Building Location</string>
+    <string name="New_Assessment">New Assessment</string>
 
 
     <string-array name="stepLabels_BirthRegistration">

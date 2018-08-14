@@ -183,13 +183,13 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                             JSONArray firstarray = new JSONArray(recoredSet.getString("recordsets"));
 
                             for (int i = 0; i < firstarray.length(); i++) {
-//
+
                                 JSONArray secondArray = firstarray.getJSONArray(0);
-//
+
                                 Log.e("insidearray", "----" + secondArray.toString());
 
                                 if (secondArray.length() > 0) {
-//
+
                                     for (int j = 0; j < secondArray.length(); j++) {
 
                                         JSONObject jsonObject = (JSONObject) secondArray.get(j);
@@ -246,7 +246,6 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                                     progressDialog.dismiss();
 
                                     llAssessmentDetails.setVisibility(View.VISIBLE);
-
                                     trackAssessmentAdapter = new TrackAssessmentAdapter(TrackNewAssessmentNo.this, entityList);
 
                                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -257,6 +256,8 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
 
                                     progressDialog.dismiss();
                                     llAssessmentDetails.setVisibility(View.GONE);
+                                    entityList.clear();
+                                    trackAssessmentAdapter.notifyDataSetChanged();
 
                                     Snackbar.make(rootlayout, "No data Found", Snackbar.LENGTH_SHORT).show();
 

@@ -1,5 +1,7 @@
 package chennaicitytrafficapplication.prematix.com.etownpublic.activity.WaterTax;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -55,6 +57,8 @@ import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Comm
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_DISTRICT_DETAILS;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_TAXBALANCEPAYMENTDETAILS;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_TOWNPANCHAYAT;
+import static chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper.PREF_SELECTDISTRICT;
+import static chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper.PREF_SELECTPANCHAYAT;
 
 public class Water_AssessmentSearch_Activity extends AppCompatActivity {
 
@@ -83,14 +87,15 @@ public class Water_AssessmentSearch_Activity extends AppCompatActivity {
     private ArrayList<String> mPanchayatList = new ArrayList<String>();
 
 
-    LinearLayout llAssessmentDetails, llBalance;
+    LinearLayout  llBalance;
 
     ArrayList<Water_Assessment_Search_Pojo> assessment_search_bean = new ArrayList<>();
 
     private RecyclerView recyclerView;
     private Water_Assessment_Search_Adapter assessmentAdapter;
     Toolbar mtoolbar;
-
+    SharedPreferences sharedPreference;
+    String MyPREFERENCES = "User";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +109,15 @@ public class Water_AssessmentSearch_Activity extends AppCompatActivity {
 
         initViews();
 
+        sharedPreference = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (!sharedPreference.getString(PREF_SELECTDISTRICT, "").isEmpty()) {
+            etDistrict.setText(sharedPreference.getString(PREF_SELECTDISTRICT, ""));
+            edTaxNo.setEnabled(true);
+        } else {
+            edTaxNo.setEnabled(false);
+        }
+        if (!sharedPreference.getString(PREF_SELECTPANCHAYAT, "").isEmpty())
+            etPanchayat.setText(sharedPreference.getString(PREF_SELECTPANCHAYAT, ""));
 
         districtList();
 
@@ -116,7 +130,7 @@ public class Water_AssessmentSearch_Activity extends AppCompatActivity {
             @Override
             public void onClick(String item, int position) {
                 etDistrict.setText(item);
-
+                etPanchayat.setText("");
 
                 for (Map.Entry<Integer, String> entry : mDistrictHashmapitems.entrySet()) {
 
@@ -227,7 +241,6 @@ public class Water_AssessmentSearch_Activity extends AppCompatActivity {
         tvStreetName = findViewById(R.id.textview_user_streetno);
         rootlayout = findViewById(R.id.rootlayout);
 
-        llAssessmentDetails = findViewById(R.id.ll_assesmentdetails);
         llBalance = findViewById(R.id.ll_balance);
 
         recyclerView = findViewById(R.id.recyclerview);
@@ -433,63 +446,80 @@ public class Water_AssessmentSearch_Activity extends AppCompatActivity {
                             JSONObject recordset = new JSONObject(response.toString());
 
                             JSONArray firstarray = new JSONArray(recordset.getString("recordsets"));
-                            for (int i = 0; i < firstarray.length(); i++) {
-
-                                Log.e("ooofirstarray", "---" + firstarray.toString());
-
-                                JSONArray secondArray = (JSONArray) firstarray.get(0);
-
-                                if (secondArray.length() > 0) {
-                                    for (int j = 0; j < secondArray.length(); j++) {
-
-                                        JSONObject jsonObject = (JSONObject) secondArray.get(i);
-
-                                        name = jsonObject.getString("Name");
-                                        doorNo = jsonObject.getString("DoorNo");
-                                        wardNo = jsonObject.getString("WardNo");
-                                        streetName = jsonObject.getString("StreetName");
-
-                                        tvName.setText(name);
-                                        tvDoorNo.setText(doorNo);
-                                        tvWardNo.setText(wardNo);
-                                        tvStreetName.setText(streetName);
-
-                                        llAssessmentDetails.setVisibility(View.VISIBLE);
+                            if (!firstarray.equals("[[],[]]")) {
 
 
-                                    }
-                                } else {
-                                    Snackbar.make(rootlayout, "No Data Found !", Snackbar.LENGTH_SHORT).show();
+                                for (int i = 0; i < firstarray.length(); i++) {
 
-                                    llBalance.setVisibility(View.GONE);
 
-                                }
 
-                                JSONArray thirdArray = (JSONArray) firstarray.get(1);
+                                    Log.e("ooofirstarray", "---" + firstarray.toString());
 
-                                if (thirdArray.length() > 0) {
+                                    JSONArray secondArray = (JSONArray) firstarray.get(0);
 
-                                    for (int j = 0; j < thirdArray.length(); j++) {
+                                    if (secondArray.length() > 0) {
+                                        for (int j = 0; j < secondArray.length(); j++) {
 
-                                        JSONObject jsonObjectthird = (JSONObject) thirdArray.get(j);
+                                            JSONObject jsonObject = (JSONObject) secondArray.get(i);
 
-                                        String finYear = jsonObjectthird.getString("FinancialYear");
-                                        int QuarterYear = jsonObjectthird.getInt("QuarterYear");
-                                        int balance = jsonObjectthird.getInt("Balance");
+                                            name = jsonObject.getString("Name");
+                                            doorNo = jsonObject.getString("DoorNo");
+                                            wardNo = jsonObject.getString("WardNo");
+                                            streetName = jsonObject.getString("StreetName");
 
-                                        assessment_search_bean.add(new Water_Assessment_Search_Pojo(edTaxNo.getText().toString(), finYear, QuarterYear, balance));
+                                            tvName.setText(name);
+                                            tvDoorNo.setText(doorNo);
+                                            tvWardNo.setText(wardNo);
+                                            tvStreetName.setText(streetName);
+
+
+                                        }
+                                    } else {
+                                        Snackbar.make(rootlayout, "No Data Found !", Snackbar.LENGTH_SHORT).show();
+                                        assessment_search_bean.clear();
+                                        assessmentAdapter.notifyDataSetChanged();
+
+                                        llBalance.setVisibility(View.GONE);
 
                                     }
-                                    balanceHistory();
-                                } else {
-                                    Snackbar.make(rootlayout, "No Data Found !", Snackbar.LENGTH_SHORT).show();
 
-                                    llBalance.setVisibility(View.GONE);
-                                }
+                                    JSONArray thirdArray = (JSONArray) firstarray.get(1);
 
-                                waitingDialog.dismiss();
+                                    if (thirdArray.length() > 0) {
+
+                                        for (int j = 0; j < thirdArray.length(); j++) {
+
+                                            JSONObject jsonObjectthird = (JSONObject) thirdArray.get(j);
+
+                                            String finYear = jsonObjectthird.getString("FinancialYear");
+                                            int QuarterYear = jsonObjectthird.getInt("QuarterYear");
+                                            int balance = jsonObjectthird.getInt("Balance");
+
+                                            assessment_search_bean.add(new Water_Assessment_Search_Pojo(edTaxNo.getText().toString(), finYear, QuarterYear, balance));
+
+                                        }
+                                        balanceHistory();
+                                    } else {
+                                        Snackbar.make(rootlayout, "No Data Found !", Snackbar.LENGTH_SHORT).show();
+                                        assessment_search_bean.clear();
+                                        assessmentAdapter.notifyDataSetChanged();
+
+                                        llBalance.setVisibility(View.GONE);
+                                    }
+
+
 
                             }
+                            } else {
+                                Snackbar.make(rootlayout, "No Data Found !", Snackbar.LENGTH_SHORT).show();
+                                assessment_search_bean.clear();
+                                assessmentAdapter.notifyDataSetChanged();
+
+                                llBalance.setVisibility(View.GONE);
+                            }
+                            waitingDialog.dismiss();
+
+
                         } catch (JSONException e) {
                             waitingDialog.dismiss();
 

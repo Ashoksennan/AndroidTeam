@@ -79,8 +79,10 @@ public class NewAssessment extends AppCompatActivity implements Validator.Valida
         ButterKnife.bind(this);
         newAssessmentHelpher = NewAssessmentHelpher.getInstance(NewAssessment.this);
         setSupportActionBar(nontax_newassessment_toolbar);
-        nontax_newassessment_toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
+      //  nontax_newassessment_toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.New_Assessment);
         et_district.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
