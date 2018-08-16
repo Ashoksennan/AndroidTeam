@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreference = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -130,10 +130,8 @@ public class HomeActivity extends AppCompatActivity
                     Snackbar.make(drawer, R.string.snack_district_search, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
+            
 
-                editor.putString(PREF_SELECTPANCHAYAT, "");
-
-                editor.apply();
 
                 spinnerDialogPanchayat.showSpinerDialog();
             }
@@ -146,6 +144,7 @@ public class HomeActivity extends AppCompatActivity
 
                 tv_selectPanchayat.setText("");
                 tv_selectDistrict.setText("");
+                tv_selectPanchayat.setHint(R.string.select_panchayat);
 
                 editor = sharedPreference.edit();
 

@@ -669,74 +669,85 @@ public class Shared_AssessmentSearch extends AppCompatActivity {
 
 
                     String recordsetsarray = response.getString("recordsets");
-
-                    JSONArray jsonArray = new JSONArray(recordsetsarray);
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONArray insideJsonArray = jsonArray.getJSONArray(i);
+                    if (!recordsetsarray.equals("[[],[]]")) {
 
 
-                        if (insideJsonArray.length() > 0 && i == 0) {
-                            JSONObject json_userdetails = insideJsonArray.getJSONObject(0);
-                            String Name = json_userdetails.getString("Name");
-                            String DoorNo = json_userdetails.getString("DoorNo");
-                            String WardNo = json_userdetails.getString("WardNo");
-                            String StreetName = json_userdetails.getString("StreetName");
+
+                        JSONArray jsonArray = new JSONArray(recordsetsarray);
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JSONArray insideJsonArray = jsonArray.getJSONArray(i);
 
 
-                            mtextView_User_Name.setText(Name);
-
-                            mtextView_UserStreetNo.setText(StreetName);
-
-                            mtextView_UserDoorNo.setText(DoorNo);
-
-                            mtextView_UserWardNo.setText(WardNo);
-
-
-                            Log.e(TAG, "Name===>" + Name);
-
-                        } else if (insideJsonArray.length() > 0) {
+                            if (insideJsonArray.length() > 0 && i == 0) {
+                                JSONObject json_userdetails = insideJsonArray.getJSONObject(0);
+                                String Name = json_userdetails.getString("Name");
+                                String DoorNo = json_userdetails.getString("DoorNo");
+                                String WardNo = json_userdetails.getString("WardNo");
+                                String StreetName = json_userdetails.getString("StreetName");
 
 
-                            for (int j = 0; j < insideJsonArray.length(); j++) {
-                                JSONObject json_taxdetails = insideJsonArray.getJSONObject(j);
+                                mtextView_User_Name.setText(Name);
 
-                                volley_TaxNO = json_taxdetails.getString("TaxNo");
-                                volley_financialyear = json_taxdetails.getString("FinancialYear");
+                                mtextView_UserStreetNo.setText(StreetName);
 
+                                mtextView_UserDoorNo.setText(DoorNo);
 
-                                volley_Balance = String.valueOf(json_taxdetails.getInt("Balance"));
-
-
-                                if (mIntent_Type.equalsIgnoreCase("NonTax"))
-                                    volley_HalfYear = String.valueOf(json_taxdetails.getInt("Month"));
-                                else
-                                    volley_HalfYear = String.valueOf(json_taxdetails.getInt("HalfYear"));
+                                mtextView_UserWardNo.setText(WardNo);
 
 
-                                mTaxBalancePayment.add(new BalanceHistory(etDistrict.getText().toString(), etPanchayat.getText().toString(), volley_TaxNO, volley_financialyear, volley_HalfYear, volley_Balance, mIntent_Type));
+                                Log.e(TAG, "Name===>" + Name);
 
-                                mLinear_Userdata.setVisibility(View.VISIBLE);
+                            } else if (insideJsonArray.length() > 0) {
+
+
+                                for (int j = 0; j < insideJsonArray.length(); j++) {
+                                    JSONObject json_taxdetails = insideJsonArray.getJSONObject(j);
+
+                                    volley_TaxNO = json_taxdetails.getString("TaxNo");
+                                    volley_financialyear = json_taxdetails.getString("FinancialYear");
+
+
+                                    volley_Balance = String.valueOf(json_taxdetails.getInt("Balance"));
+
+
+                                    if (mIntent_Type.equalsIgnoreCase("NonTax"))
+                                        volley_HalfYear = String.valueOf(json_taxdetails.getInt("Month"));
+                                    else
+                                        volley_HalfYear = String.valueOf(json_taxdetails.getInt("HalfYear"));
+
+
+                                    mTaxBalancePayment.add(new BalanceHistory(etDistrict.getText().toString(), etPanchayat.getText().toString(), volley_TaxNO, volley_financialyear, volley_HalfYear, volley_Balance, mIntent_Type));
+
+                                    mLinear_Userdata.setVisibility(View.VISIBLE);
+                                }
+
+
+                                prof_assessmentAdapter = new Prof_Assessment_Search_Adapter(Shared_AssessmentSearch.this, mTaxBalancePayment);
+
+
+                                recyclerView.setAdapter(prof_assessmentAdapter);
+
+                                prof_assessmentAdapter.notifyDataSetChanged();
+
+
+                            } else {
+                                mLinear_Userdata.setVisibility(View.GONE);
+                                Snackbar.make(rootlayout, "No data found", Snackbar.LENGTH_SHORT).show();
+                                mTaxBalancePayment.clear();
+                                prof_assessmentAdapter.notifyDataSetChanged();
+
                             }
 
 
-                            prof_assessmentAdapter = new Prof_Assessment_Search_Adapter(Shared_AssessmentSearch.this, mTaxBalancePayment);
-
-
-                            recyclerView.setAdapter(prof_assessmentAdapter);
-
-                            prof_assessmentAdapter.notifyDataSetChanged();
-
-
-                        } else {
-                            mLinear_Userdata.setVisibility(View.GONE);
-                            Snackbar.make(rootlayout, "No data found", Snackbar.LENGTH_SHORT).show();
-                            mTaxBalancePayment.clear();
-                            prof_assessmentAdapter.notifyDataSetChanged();
-
                         }
-
+                    }
+                    else {
+                        mLinear_Userdata.setVisibility(View.GONE);
+                        Snackbar.make(rootlayout, "No data found", Snackbar.LENGTH_SHORT).show();
+                        mTaxBalancePayment.clear();
+                        prof_assessmentAdapter.notifyDataSetChanged();
 
                     }
 

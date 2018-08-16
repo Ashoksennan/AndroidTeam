@@ -88,7 +88,7 @@ public class AssessmentSearch extends AppCompatActivity {
 
     SharedPreferences sharedPreference;
     String MyPREFERENCES = "User";
-    LinearLayout llAssessmentDetails, llBalance;
+    LinearLayout llBalance;
 
     ArrayList<AssessmentSearch_Pojo> assessment_search_bean = new ArrayList<>();
 
@@ -250,7 +250,6 @@ public class AssessmentSearch extends AppCompatActivity {
         tvStreetName = findViewById(R.id.textview_user_streetno);
         rootlayout = findViewById(R.id.rootlayout);
 
-        llAssessmentDetails = findViewById(R.id.ll_assesmentdetails);
         llBalance = findViewById(R.id.ll_balance);
 
         recyclerView = findViewById(R.id.recyclerview);
@@ -456,71 +455,84 @@ public class AssessmentSearch extends AppCompatActivity {
                             JSONObject recordset = new JSONObject(response.toString());
 
                             JSONArray firstarray = new JSONArray(recordset.getString("recordsets"));
-                            for (int i = 0; i < firstarray.length(); i++) {
-
-                                Log.e("ooofirstarray", "---" + firstarray.toString());
-
-                                JSONArray secondArray = (JSONArray) firstarray.get(0);
-
-                                if (secondArray.length() > 0) {
-                                    for (int j = 0; j < secondArray.length(); j++) {
-
-                                        JSONObject jsonObject = (JSONObject) secondArray.get(i);
-
-                                        name = jsonObject.getString("Name");
-                                        doorNo = jsonObject.getString("DoorNo");
-                                        wardNo = jsonObject.getString("WardNo");
-                                        streetName = jsonObject.getString("StreetName");
-
-                                        tvName.setText(name);
-                                        tvDoorNo.setText(doorNo);
-                                        tvWardNo.setText(wardNo);
-                                        tvStreetName.setText(streetName);
-
-                                        llAssessmentDetails.setVisibility(View.VISIBLE);
+                            if (!firstarray.equals("[[],[]]")) {
 
 
-                                    }
-                                } else {
+                                for (int i = 0; i < firstarray.length(); i++) {
 
-                                    Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
-                                    assessment_search_bean.clear();
-                                    assessmentAdapter.notifyDataSetChanged();
+                                    Log.e("ooofirstarray", "---" + firstarray.toString());
+
+                                    JSONArray secondArray = (JSONArray) firstarray.get(0);
+
+                                    if (secondArray.length() > 0) {
+                                        for (int j = 0; j < secondArray.length(); j++) {
+
+                                            JSONObject jsonObject = (JSONObject) secondArray.get(i);
+
+                                            name = jsonObject.getString("Name");
+                                            doorNo = jsonObject.getString("DoorNo");
+                                            wardNo = jsonObject.getString("WardNo");
+                                            streetName = jsonObject.getString("StreetName");
+
+                                            tvName.setText(name);
+                                            tvDoorNo.setText(doorNo);
+                                            tvWardNo.setText(wardNo);
+                                            tvStreetName.setText(streetName);
+
+                                            llBalance.setVisibility(View.VISIBLE);
 
 
-                                    llBalance.setVisibility(View.GONE);
+                                        }
+                                    } else {
 
-                                }
-
-                                JSONArray thirdArray = (JSONArray) firstarray.get(1);
-
-                                if (thirdArray.length() > 0) {
-
-                                    for (int j = 0; j < thirdArray.length(); j++) {
-
-                                        JSONObject jsonObjectthird = (JSONObject) thirdArray.get(j);
-
-                                        String taxNo = jsonObjectthird.getString("TaxNo");
-                                        String finYear = jsonObjectthird.getString("FinancialYear");
-                                        int halfYear = jsonObjectthird.getInt("HalfYear");
-                                        int balance = jsonObjectthird.getInt("Balance");
-
-                                        assessment_search_bean.add(new AssessmentSearch_Pojo(taxNo, finYear, halfYear, balance));
+                                        Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
+//                                        assessment_search_bean.clear();
+//                                        assessmentAdapter.notifyDataSetChanged();
+//
+//
+//                                        llBalance.setVisibility(View.GONE);
 
                                     }
-                                    balanceHistory();
-                                } else {
 
-                                    Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
-                                    assessment_search_bean.clear();
-                                    assessmentAdapter.notifyDataSetChanged();
+                                    JSONArray thirdArray = (JSONArray) firstarray.get(1);
 
-                                    llBalance.setVisibility(View.GONE);
+                                    if (thirdArray.length() > 0) {
+
+                                        for (int j = 0; j < thirdArray.length(); j++) {
+
+                                            JSONObject jsonObjectthird = (JSONObject) thirdArray.get(j);
+
+                                            String taxNo = jsonObjectthird.getString("TaxNo");
+                                            String finYear = jsonObjectthird.getString("FinancialYear");
+                                            int halfYear = jsonObjectthird.getInt("HalfYear");
+                                            int balance = jsonObjectthird.getInt("Balance");
+
+                                            assessment_search_bean.add(new AssessmentSearch_Pojo(taxNo, finYear, halfYear, balance));
+
+                                        }
+                                        balanceHistory();
+                                    } else {
+
+                                        Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
+//                                        assessment_search_bean.clear();
+//                                        assessmentAdapter.notifyDataSetChanged();
+
+                                        llBalance.setVisibility(View.GONE);
+                                    }
+
+
+
                                 }
-
-                                waitingDialog.dismiss();
-
                             }
+                              else {
+                                    Snackbar.make(rootlayout, "No Data Found ", Snackbar.LENGTH_SHORT).show();
+                                    assessment_search_bean.clear();
+                                    assessmentAdapter.notifyDataSetChanged();
+
+                                    llBalance.setVisibility(View.GONE);
+                                }
+                            waitingDialog.dismiss();
+
                         } catch (JSONException e) {
                             waitingDialog.dismiss();
 
@@ -582,7 +594,6 @@ public class AssessmentSearch extends AppCompatActivity {
 
     public void balanceHistory() {
 
-        llBalance.setVisibility(View.VISIBLE);
         assessmentAdapter = new Assessment_Search_Adapter(assessment_search_bean);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
