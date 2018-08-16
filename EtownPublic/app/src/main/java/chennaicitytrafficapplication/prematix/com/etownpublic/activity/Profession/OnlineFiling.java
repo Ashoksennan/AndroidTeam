@@ -53,6 +53,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Panchayats;
 import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Profession_Tax.OnlineFilingDemandEntity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.ViewDcb;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.OrganisationAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax.OnlineFilingDemandAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
@@ -63,6 +64,7 @@ import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_DISTRICT_DETAILS;
+import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_FinancialDates;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_GET_PROFESSION_DEMAND;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_ONLINE_FILING_SAVE;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_ORGANISATIONS;
@@ -182,8 +184,17 @@ public class OnlineFiling extends AppCompatActivity {
             Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
         }
 
-        finYear_items.add("2018-2019");
-        finYear_items.add("2017-2018");
+
+        if (Common.isNetworkAvailable(getApplicationContext())) {
+            getFinyear();
+
+        } else {
+
+            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+        }
+
+//        finYear_items.add("2018-2019");
+//        finYear_items.add("2017-2018");
 
         spinnerDialogPanchayat=new SpinnerDialog(OnlineFiling.this,panchayat_items,"Select or Search Panchayat","Close");// With No Animation
         spinnerDialogPanchayat=new SpinnerDialog(OnlineFiling.this,panchayat_items,"Select or Search Panchayat", R.style.DialogAnimations_SmileWindow,"Close");// With 	Animation
@@ -253,7 +264,7 @@ public class OnlineFiling extends AppCompatActivity {
         etPanchayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etDistrict.length()>0){
+                if (!etDistrict.getText().toString().isEmpty()){
                     spinnerDialogPanchayat.showSpinerDialog();
 
                 }else{
@@ -265,7 +276,7 @@ public class OnlineFiling extends AppCompatActivity {
         etOrgName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etDistrict.length()>0 && etPanchayat.length()>0){
+                if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty()){
 //                    spinnerDialogOrganisations.showSpinerDialog();
 
                     if (organisations.size()>0){
@@ -301,7 +312,7 @@ public class OnlineFiling extends AppCompatActivity {
         etFinancialYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etDistrict.length()>0 && etPanchayat.length()>0){
+                if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty()){
                     spinnerDialogFinYear.showSpinerDialog();
 
                 }else{
@@ -315,7 +326,7 @@ public class OnlineFiling extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etDistrict.length()==0 && etPanchayat.length()==0){
+                if (etDistrict.getText().toString().isEmpty() && etPanchayat.getText().toString().isEmpty()){
 
                     Snackbar.make(rootLayout, "Select District and Panchayat", Snackbar.LENGTH_SHORT).show();
 
@@ -329,7 +340,8 @@ public class OnlineFiling extends AppCompatActivity {
 
                 if (type.equalsIgnoreCase("Trade")){
 
-                    if (etDistrict.length()>0 && etPanchayat.length()>0 && etTaxNo.length()>0 && etFinancialYear.length()>0){
+                    if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty() &&
+                            !etTaxNo.getText().toString().isEmpty() && !etFinancialYear.getText().toString().isEmpty()){
 
                         if (Common.isNetworkAvailable(getApplicationContext())) {
                             getTrade(districtName,panchayatName,etFinancialYear.getText().toString(),type,etTaxNo.getText().toString());
@@ -344,7 +356,8 @@ public class OnlineFiling extends AppCompatActivity {
                     }
                 }else if (type.equalsIgnoreCase("Individual")){
 
-                    if (etDistrict.length()>0 && etPanchayat.length()>0 && etTaxNo.length()>0 && etFinancialYear.length()>0){
+                    if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty() &&
+                            !etTaxNo.getText().toString().isEmpty() && !etFinancialYear.getText().toString().isEmpty()){
 
                         if (Common.isNetworkAvailable(getApplicationContext())) {
                             getOrgIndividual(districtName,panchayatName,etFinancialYear.getText().toString(),type,
@@ -360,7 +373,8 @@ public class OnlineFiling extends AppCompatActivity {
                     }
                 }else if (type.equalsIgnoreCase("Group")){
 
-                    if (etDistrict.length()>0 && etPanchayat.length()>0 && etFinancialYear.length()>0){
+                    if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty() &&
+                            !etFinancialYear.getText().toString().isEmpty()){
 
                         if (Common.isNetworkAvailable(getApplicationContext())) {
                             getOrgGroup(districtName,panchayatName,etFinancialYear.getText().toString(),type,orgCode);
@@ -382,7 +396,8 @@ public class OnlineFiling extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etName.length()>0 && etMobileNo.length()>0 && etEmailId.length()>0){
+                if (!etName.getText().toString().isEmpty() && !etMobileNo.getText().toString().isEmpty() &&
+                        !etEmailId.getText().toString().isEmpty()){
 
                     if (Common.isNetworkAvailable(getApplicationContext())) {
                         savingOnlineFiling(etName.getText().toString(),etMobileNo.getText().toString(),
@@ -401,6 +416,84 @@ public class OnlineFiling extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void getFinyear() {
+        String REQUEST_TAG = "apigetFinYear";
+
+        progressDialog = new SpotsDialog(OnlineFiling.this);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, API_FinancialDates, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.length() > 0) {
+
+                        JSONArray jsonArray = new JSONArray(response.getString("recordsets"));
+
+                        if (jsonArray.length() > 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONArray jsonArray1 = (JSONArray) jsonArray.get(i);
+
+
+                                if (jsonArray1.length() > 0) {
+                                    for (int j = 0; j < jsonArray1.length(); j++) {
+                                        JSONObject jsonObject = (JSONObject) jsonArray1.get(j);
+                                        String FinYear = jsonObject.getString("FinYear");
+
+                                        finYear_items.add(FinYear);
+                                    }
+
+                                }
+
+                            }
+                            etFinancialYear.setText(finYear_items.get(0));
+
+                        }
+
+                    }
+                    progressDialog.dismiss();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    SnackShowTop("Time out", rootLayout);
+                } else if (error instanceof AuthFailureError) {
+                    SnackShowTop("Connection Time out", rootLayout);
+                } else if (error instanceof ServerError) {
+                    SnackShowTop("Could not connect server", rootLayout);
+                } else if (error instanceof NetworkError) {
+                    SnackShowTop("Please check the internet connection", rootLayout);
+                } else if (error instanceof ParseError) {
+                    SnackShowTop("Parse Error", rootLayout);
+                } else {
+                    SnackShowTop(error.getMessage(), rootLayout);
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("accesstoken", Common.ACCESS_TOKEN);
+                return params;
+            }
+        };
+
+        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonArrayRequest, REQUEST_TAG);
 
     }
 

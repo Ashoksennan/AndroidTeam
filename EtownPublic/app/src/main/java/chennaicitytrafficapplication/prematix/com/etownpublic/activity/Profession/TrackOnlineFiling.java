@@ -99,7 +99,7 @@ public class TrackOnlineFiling extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etMobileNo.length()>0){
+                if (!etMobileNo.getText().toString().isEmpty()){
 
                     if (Common.isNetworkAvailable(getApplicationContext())) {
                         addTrack(etMobileNo.getText().toString());

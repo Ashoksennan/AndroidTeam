@@ -203,7 +203,7 @@ public class NameTransfer extends AppCompatActivity {
         etPanchayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etDistrict.length()>0){
+                if (!etDistrict.getText().toString().isEmpty()){
                     spinnerDialogPanchayat.showSpinerDialog();
 
                 }else{
@@ -217,7 +217,7 @@ public class NameTransfer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etDistrict.length()==0 && etPanchayat.length()==0){
+                if (etDistrict.getText().toString().isEmpty() && etPanchayat.getText().toString().isEmpty()){
 
                     Snackbar.make(rlRoot, "Select District and Panchayat", Snackbar.LENGTH_SHORT).show();
                 }
@@ -228,7 +228,8 @@ public class NameTransfer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etDistrict.length()>0 && etPanchayat.length()>0 && edTaxNo.length()>0){
+                if (!etDistrict.getText().toString().isEmpty() && !etPanchayat.getText().toString().isEmpty() &&
+                        !edTaxNo.getText().toString().isEmpty()){
 
                     getAssessmentDetails(edTaxNo.getText().toString(),districtName,panchayatName);
 
@@ -271,7 +272,8 @@ public class NameTransfer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etMobileNo.length()>0 && etEmailId.length()>0 && etTransferName.length()>0 && etChoosenFileOne.length()>0){
+                if (!etMobileNo.getText().toString().isEmpty() && !etEmailId.getText().toString().isEmpty() &&
+                        !etTransferName.getText().toString().isEmpty() && !etChoosenFileOne.getText().toString().isEmpty()){
 
                     if (filePath != null) {
 
