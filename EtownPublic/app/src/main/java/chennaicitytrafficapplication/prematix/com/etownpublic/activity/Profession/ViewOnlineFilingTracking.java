@@ -44,6 +44,7 @@ import java.util.Map;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.SharedAdapter.ApprovalAdapter;
+import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
@@ -148,7 +149,14 @@ public class ViewOnlineFilingTracking extends AppCompatActivity {
         tvTaxNo.setText(taxNo);
         tvStatus.setText(status);
 
-        getApprovalStatus(mobileNo,reqNo,reqDate,district,panchayat);
+        if (Common.isNetworkAvailable(getApplicationContext())) {
+            getApprovalStatus(mobileNo,reqNo,reqDate,district,panchayat);
+
+        } else {
+
+            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+        }
+
 
     }
 

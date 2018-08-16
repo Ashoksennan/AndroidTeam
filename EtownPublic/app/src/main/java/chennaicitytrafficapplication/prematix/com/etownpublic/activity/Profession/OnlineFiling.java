@@ -55,6 +55,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.OrganisationAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax.OnlineFilingDemandAdapter;
+import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.listener.RecyclerClickListener;
 import dmax.dialog.SpotsDialog;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
@@ -173,7 +174,13 @@ public class OnlineFiling extends AppCompatActivity {
                 new LinearLayoutManager(OnlineFiling.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewDemand.setLayoutManager(linearLayoutManager1);
 
-        districtList();
+        if (Common.isNetworkAvailable(getApplicationContext())) {
+            districtList();
+
+        } else {
+
+            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+        }
 
         finYear_items.add("2018-2019");
         finYear_items.add("2017-2018");
@@ -197,7 +204,16 @@ public class OnlineFiling extends AppCompatActivity {
 
                 etPanchayat.setText("");
                 etOrgName.setText("");
-                panchayatList(districtId);
+
+                if (Common.isNetworkAvailable(getApplicationContext())) {
+                    panchayatList(districtId);
+
+                } else {
+
+                    Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -223,7 +239,14 @@ public class OnlineFiling extends AppCompatActivity {
                 panchayatName = s;
                 panchayatId = panchayats.get(position).getPanchayatId();
 
-                organisationList(districtName,panchayatName);
+                if (Common.isNetworkAvailable(getApplicationContext())) {
+                    organisationList(districtName,panchayatName);
+
+                } else {
+
+                    Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -246,7 +269,14 @@ public class OnlineFiling extends AppCompatActivity {
 //                    spinnerDialogOrganisations.showSpinerDialog();
 
                     if (organisations.size()>0){
-                        setOrganisations();
+
+                        if (Common.isNetworkAvailable(getApplicationContext())) {
+                            setOrganisations();
+
+                        } else {
+
+                            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                        }
                     }else{
 
                         Snackbar.make(rootLayout, "No Organisations Found", Snackbar.LENGTH_SHORT).show();
@@ -301,7 +331,13 @@ public class OnlineFiling extends AppCompatActivity {
 
                     if (etDistrict.length()>0 && etPanchayat.length()>0 && etTaxNo.length()>0 && etFinancialYear.length()>0){
 
-                        getTrade(districtName,panchayatName,etFinancialYear.getText().toString(),type,etTaxNo.getText().toString());
+                        if (Common.isNetworkAvailable(getApplicationContext())) {
+                            getTrade(districtName,panchayatName,etFinancialYear.getText().toString(),type,etTaxNo.getText().toString());
+
+                        } else {
+
+                            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                        }
                     }else {
 
                         Snackbar.make(rootLayout, "Enter all Values", Snackbar.LENGTH_SHORT).show();
@@ -310,8 +346,14 @@ public class OnlineFiling extends AppCompatActivity {
 
                     if (etDistrict.length()>0 && etPanchayat.length()>0 && etTaxNo.length()>0 && etFinancialYear.length()>0){
 
-                        getOrgIndividual(districtName,panchayatName,etFinancialYear.getText().toString(),type,
-                                etTaxNo.getText().toString(),orgCode);
+                        if (Common.isNetworkAvailable(getApplicationContext())) {
+                            getOrgIndividual(districtName,panchayatName,etFinancialYear.getText().toString(),type,
+                                    etTaxNo.getText().toString(),orgCode);
+                        } else {
+
+                            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                        }
+
                     }else {
 
                         Snackbar.make(rootLayout, "Enter all Values", Snackbar.LENGTH_SHORT).show();
@@ -320,7 +362,13 @@ public class OnlineFiling extends AppCompatActivity {
 
                     if (etDistrict.length()>0 && etPanchayat.length()>0 && etFinancialYear.length()>0){
 
-                        getOrgGroup(districtName,panchayatName,etFinancialYear.getText().toString(),type,orgCode);
+                        if (Common.isNetworkAvailable(getApplicationContext())) {
+                            getOrgGroup(districtName,panchayatName,etFinancialYear.getText().toString(),type,orgCode);
+
+                        } else {
+
+                            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                        }
 
                     }else {
 
@@ -336,10 +384,16 @@ public class OnlineFiling extends AppCompatActivity {
 
                 if (etName.length()>0 && etMobileNo.length()>0 && etEmailId.length()>0){
 
-                    savingOnlineFiling(etName.getText().toString(),etMobileNo.getText().toString(),
-                            etEmailId.getText().toString(),organisationName,saveType,selected_sNos,
-                            selectedTaxNos,districtName,panchayatName,etFinancialYear.getText().toString(),
-                            String.valueOf(orgCode),tradeName);
+                    if (Common.isNetworkAvailable(getApplicationContext())) {
+                        savingOnlineFiling(etName.getText().toString(),etMobileNo.getText().toString(),
+                                etEmailId.getText().toString(),organisationName,saveType,selected_sNos,
+                                selectedTaxNos,districtName,panchayatName,etFinancialYear.getText().toString(),
+                                String.valueOf(orgCode),tradeName);
+
+                    } else {
+
+                        Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                    }
 
                 }else{
                     Snackbar.make(rootLayout, "Enter all Values", Snackbar.LENGTH_SHORT).show();

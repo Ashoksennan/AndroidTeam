@@ -40,6 +40,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Profession_T
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax.TrackOnlineFilingAdapter;
+import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
@@ -100,7 +101,12 @@ public class TrackOnlineFiling extends AppCompatActivity {
 
                 if (etMobileNo.length()>0){
 
-                    addTrack(etMobileNo.getText().toString());
+                    if (Common.isNetworkAvailable(getApplicationContext())) {
+                        addTrack(etMobileNo.getText().toString());
+                    } else {
+
+                        Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+                    }
 
                 }else{
                     Snackbar.make(rootLayout, "Enter Request No or Mobile Number", Snackbar.LENGTH_SHORT).show();

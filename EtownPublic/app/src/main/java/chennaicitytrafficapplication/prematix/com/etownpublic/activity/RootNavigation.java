@@ -19,6 +19,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievance
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Track;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.NonTax.NewAssessment;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.OnlineFiling;
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.TrackOnlineFiling;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.AssessmentSearch;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.NameTransfer;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PaidHistory;
@@ -456,6 +457,15 @@ public class RootNavigation extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), OnlineFiling.class);
+                startActivity(i);
+            }
+        });
+
+        mlinear_TrackOnlineFilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), TrackOnlineFiling.class);
                 startActivity(i);
             }
         });
