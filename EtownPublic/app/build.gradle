@@ -59,5 +59,7 @@ dependencies {
     implementation 'com.github.badoualy:stepper-indicator:1.0.7'
     implementation 'com.merhold.extensiblepageindicator:extensiblepageindicator:1.0.1'
 
-
+    
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 }
