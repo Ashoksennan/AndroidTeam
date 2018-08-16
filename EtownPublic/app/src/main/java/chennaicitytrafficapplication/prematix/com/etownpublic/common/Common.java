@@ -13,7 +13,8 @@ public class Common {
 
   public static String  API_TOWNPANCHAYAT=baseUrl+"EPSGetPanchayatDetails?DistrictId=";
 
-
+  public static String API_ASSBY_NO="http://www.predemos.com/Etown/EPSTaxBalancePaymentDetails?";
+  public static String API_ADD_NEW_CONNECTION = "http://www.predemos.com/Etown/EPSWaterNewConnection?";
 
   public static String  API_TAXBALANCEPAYMENTDETAILS=baseUrl+"EPSTaxBalancePaymentDetails?";
 
@@ -23,6 +24,18 @@ public class Common {
 
   public static String API_NEW_TRACK_ASSESSMENTORCONNECTION=baseUrl+"EPSTrackingRequest?";
 
+<<<<<<< HEAD
+=======
+  public static String API_TAX_MASTER_DETAILS ="http://www.predemos.com/Etown/EPSTaxMasterDetails?";
+public static String API_GET_STREET ="http://www.predemos.com/Etown/EPSTaxMasterDetails?";
+
+public static String API_NEW_PROFESSIONASS="http://www.predemos.com/Etown/EPSProfessionNewAssessment?";
+
+
+  public static String API_PROPERTYTAXCALCULATION=baseUrl+"EPSPropertyTaxCalcuation?";
+  public static String API_PROPERTYTAXMASTERDETAILS=baseUrl+"EPSTaxMasterDetails?";
+
+>>>>>>> Murugan
   public static String GET_ASSESSMENT_PROP=baseUrl+"EPSTaxBalancePaymentDetails?Type=PSearch&TaxNo=";
 
   public static String  uploadUrl="http://192.168.1.11:2020/getdata/";
@@ -37,6 +50,20 @@ public class Common {
 
   public static String API_PROPERTYTAXCALCULATION=baseUrl+"EPSPropertyTaxCalcuation?";
   public static String API_PROPERTYTAXMASTERDETAILS=baseUrl+"EPSTaxMasterDetails?";
+
+
+
+
+
+
+  public static String param_distrct ="district";
+  public static String param_panchayat ="panchayat";
+  public static String param_mobileNo ="mobileNo";
+  public static String param_emailId ="emailId";
+  public static String param_finyear ="finyear";
+  public static String param_name="name";
+  public static String Type ="type";
+
 
 
 

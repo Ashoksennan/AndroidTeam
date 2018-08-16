@@ -110,7 +110,28 @@
             android:name=".activity.ContactUs"
             android:parentActivityName=".HomeActivity" />
 
+<<<<<<< HEAD
         <activity android:name=".activity.Property.PropertyTaxCalculator_Activity" android:parentActivityName=".HomeActivity"/>
+=======
+        <activity android:name=".activity.Property.PropertyTaxCalculator_Activity"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity android:name=".activity.Property.NameTransfer"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity android:name=".activity.Profession.OnlineFiling"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity android:name=".activity.Profession.TrackOnlineFiling"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity android:name=".activity.Profession.ViewOnlineFilingTracking"
+            android:parentActivityName=".activity.Profession.TrackOnlineFiling"/>
+
+        <activity android:name=".activity.Shared_Modules.Shared_Common_All_Tax.NewAssessment_Activity"
+            android:parentActivityName=".HomeActivity"/>
+
+>>>>>>> Murugan
         <!-- Broadcast receiver declaration in manifest file and make sure to enable it -->
         <receiver
             android:name=".Network_Connection_BroadCast.InternetConnector_Receiver"

@@ -19,7 +19,7 @@ public class SharedPreferenceHelper {
     public static SharedPreferenceHelper sharedPreferenceHelpher=null;
     public static final String sharedPreferenceName = "BIRTH_REGISTRATION";
 
-    private SharedPreferenceHelper(Context context) {
+    public SharedPreferenceHelper(Context context) {
         SharedPreferenceHelper.context = context;
     }
     public static SharedPreferenceHelper getInstance(Context context1){
@@ -155,7 +155,39 @@ public class SharedPreferenceHelper {
 
 
 
+    public void stepperOne(String district,String panchayat,String name,String mobileNo,String emailID)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("StepperPreference",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString("pDistrict",district);
+        editor.putString("pPanchayat",panchayat);
+        editor.putString("pName",name);
+        editor.putString("pMobileNo",mobileNo);
+        editor.putString("pEmailId",emailID);
+
+        editor.apply();
+    }
+
+    public void stepperProperty_Two(String bLicenseNo,String bLicenseDate,String BlockNo,String wardNo,String StreetCode,
+                                    String streetName,String bZone,String bUsage,String bType,String totalArea)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("StepperPreference",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("bLicenseNo",bLicenseNo);
+        editor.putString("bLicenseDate",bLicenseDate);
+        editor.putString("BlockNo",BlockNo);
+        editor.putString("wardNo",wardNo);
+        editor.putString("streetCode",StreetCode);
+        editor.putString("streetName",streetName);
+        editor.putString("bZone",bZone);
+        editor.putString("bUsage",bUsage);
+        editor.putString("bType",bType);
+        editor.putString("totalArea",totalArea);
+
+        editor.apply();
+    }
 
 
 

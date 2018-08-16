@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/rootLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -35,7 +36,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/georgia"
-                    android:text="Registered Document"
+                    android:text="Registered Document *"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/fragment_body_text_size"
                     android:textStyle="italic" />
@@ -48,6 +49,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_choose_regDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -60,6 +62,7 @@
                         android:textStyle="italic|bold" />
 
                     <TextView
+                        android:id="@+id/tv_upload_regDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -81,7 +84,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/georgia"
-                    android:text="Parent Document"
+                    android:text="Parent Document *"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/fragment_body_text_size"
                     android:textStyle="italic" />
@@ -94,6 +97,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_choose_parentDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -106,6 +110,7 @@
                         android:textStyle="italic|bold" />
 
                     <TextView
+                        android:id="@+id/tv_upload_parent_doc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -140,6 +145,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_choose_pattaDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -152,6 +158,7 @@
                         android:textStyle="italic|bold" />
 
                     <TextView
+                        android:id="@+id/tv_upload_pattaDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
