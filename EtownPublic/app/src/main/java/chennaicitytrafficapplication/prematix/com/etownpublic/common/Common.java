@@ -29,6 +29,18 @@ public class Common {
   public static String API_PROPERTYTAXMASTERDETAILS=baseUrl+"EPSTaxMasterDetails?";
 
 
+<<<<<<< HEAD
+=======
+  public static String  uploadUrl="http://192.168.1.11:2020/getdata/";
+
+  public static String API_ORGANISATIONS=baseUrl+"EPSTaxMasterDetails?Type=Organization&Input=&District=";
+
+  public static String API_GET_PROFESSION_DEMAND=baseUrl+"EPSProfessionDemand?District=";
+
+  public static String API_ONLINE_FILING_SAVE=baseUrl+"EPSProfessionOnline?District=";
+
+  public static String API_TRACKNEWASSESSMENT=baseUrl+"EPSTrackingRequest?";
+>>>>>>> Nagarjun
 
   public static boolean isNetworkAvailable(final Context context) {
     final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

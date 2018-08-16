@@ -44,7 +44,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
-import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.TRACKNEWASSESSMENT;
+import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_TRACKNEWASSESSMENT;
 
 public class TrackOnlineFiling extends AppCompatActivity {
 
@@ -123,7 +123,7 @@ public class TrackOnlineFiling extends AppCompatActivity {
 
         String REQUEST_TAG = "townPanchayat";
 
-        String url = TRACKNEWASSESSMENT+"Type=ProfessionFiling&MobileNo="+mobileNo+"&RequestNo=&RequestDate=&District=&" +
+        String url = API_TRACKNEWASSESSMENT+"Type=ProfessionFiling&MobileNo="+mobileNo+"&RequestNo=&RequestDate=&District=&" +
                 "Panchayat=";
 
         Log.e("ooo","---"+url);
