@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".NewAssessment_Activity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/new_ass_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hoefler_text"
+            android:gravity="center"
+            android:text="New Assessment"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fragment_header_text_size"
+            android:textStyle="italic"
+
+            />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <com.badoualy.stepperindicator.StepperIndicator
+                android:id="@+id/new_ass_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:stpi_circleColor="@color/white"
+                app:stpi_circleRadius="7dp"
+                app:stpi_indicatorColor="@color/indicatorTint"
+                app:stpi_indicatorRadius="6dp"
+                app:stpi_labelColor="@color/white"
+                app:stpi_labels="@array/stepLabels"
+                app:stpi_lineColor="@color/white"
+                app:stpi_lineDoneColor="@color/indicatorTint"
+                app:stpi_showDoneIcon="true"
+                app:stpi_stepCount="3"
+
+
+                />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/new_ass_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

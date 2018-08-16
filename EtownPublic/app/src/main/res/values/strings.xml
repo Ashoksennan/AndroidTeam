@@ -97,21 +97,19 @@
     </string-array>
 
 
-    <string name="nametransafer">Name Transfer</string>
-    <string name="mobileno">Mobile No</string>
-    <string name="emailId">Email Id</string>
-    <string name="trname">Transfer Name</string>
-    <string name="reg_doc">Registration Document</string>
-    <string name="upload">Upload</string>
+    <string-array name="stepLabels">
+        <item><i>Personal Details</i></item>
+        <item><i>Address</i></item>
+        <item><i>Document </i></item>
 
-    <string name="choosefile">Choose File</string>
-    <string name="name_legel_doc">Name Legal Document</string>
-    <string name="death_certificate">Death Certificate </string>
+    </string-array>
+
+
+
     <string name="property_name_transfer">Name Transfer</string>
     <string name="profession_online_filing">Online Filing</string>
 
     <string name="financial_year">Financial Year</string>
-    <string name="name">Name</string>
     <string name="tax_no">Tax No</string>
     <string name="door_no">Door No</string>
     <string name="wardno">Ward No</string>
@@ -120,5 +118,62 @@
     <string name="profession_track_online_filing">Track Online Filing</string>
 
     <string name="track_online_filing">Track Online Filing</string>
+
+
+    <string name="mobileno">Mobile No</string>
+    <string name="emailId">Email Id</string>
+    <string name="trname">Transfer Name</string>
+    <string name="reg_doc">Registration Document</string>
+    <string name="name_legel_doc">Name Legal Document</string>
+    <string name="death_certificate">Death Certificate </string>
+    <string name="upload">Upload</string>
+
+    <string name="property_tax_latest">Property Tax Receipt (Latest) </string>
+    <string name="choosefile">Choose File</string>
+
+    <string name="nametransafer">Name Transfer</string>
+    <string name="assmentsearch">Property Search</string>
+    <string name="type">Type</string>
+    <string name="trade">Trade</string>
+    <string name="organization">Organization</string>
+    <string name="tradename">Trade Name</string>
+    <string name="designationnname">Designation Name</string>
+    <string name="organizationname">Organization name</string>
+
+    <string name="doorno">Door No</string>
+    <string name="propertytax_no">Property Tax No.</string>
+    <string name="taxname">Tax Name</string>
+    <string name="name">Name</string>
+    <string name="connection_type">Connection Type </string>
+
+    <string name="slabrate">Slab Rate</string>
+    <string name="doc_enclosed">Document Enclosed</string>
+    <string name="trade_orgletter">Trade / Organization Letter</string>
+    <string name="incomedetails">Income Details</string>
+    <string name="blno"> Building Licence No</string>
+
+
+
+    <string name="err_msg_finyear">Select FinYear</string>
+
+    <string name="err_msg_mobileNo">Enter MobileNo</string>
+    <string name="err_msg_mobileNoLength"> MobileNo Length should be 10 digit</string>
+    <string name="err_msg_name">Enter Name</string>
+    <string name="err_msg_email">Enter valid Email</string>
+
+    <string name="err_msg_blno">Enter Building Licence No </string>
+    <string name="err_msg_bldate">Choose Building Licence Date</string>
+    <string name="err_msg_blockNo">Enter Block No</string>
+    <string name="err_msg_wardno">Enter Ward No</string>
+    <string name="err_msg_streetname">Enter Street Name</string>
+    <string name="err_msg_buildingzone">Enter Building Zone</string>
+    <string name="err_msg_bAge">Enter Building Age</string>
+    <string name="err_msg_taxtype">Enter Tax Type </string>
+    <string name="err_msg_slabrate">Enter Slab Rate</string>
+    <string name="err_msg_doorno">Enter Door No</string>
+    <string name="err_msg_tradlename">Enter Trade Name </string>
+    <string name="err_msg_taxno">Enter Property Tax No</string>
+    <string name="err_msg_taxname">Enter Tax Name</string>
+    <string name="err_msg_connectiontype">select connection type</string>
 
 </resources>

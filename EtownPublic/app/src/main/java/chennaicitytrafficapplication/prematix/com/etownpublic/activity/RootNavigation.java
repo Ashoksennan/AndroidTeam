@@ -26,6 +26,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Birth_Death.BirthAbstract_Activity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Birth_Death.BirthCertificateSearch_Activity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.MakePayment;
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.NewAssessment_Activity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.Shared_AssessmentSearch;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.Shared_PaymentHistory;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.TrackNewAssessmentNo;
@@ -280,15 +281,44 @@ public class RootNavigation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Common.isNetworkAvailable(getApplicationContext())) {
-                    if (mIntent_Type.equalsIgnoreCase("NonTax"))
+                    Intent i = new Intent(getApplicationContext(), NewAssessment_Activity.class);
+
+                    if (mIntent_Type.equalsIgnoreCase("Property"))
 
                     {
-                        Intent i = new Intent(getApplicationContext(), NewAssessment.class);
+                        i.putExtra(Common.Type,"P");
                         startActivity(i);
                         overridePendingTransition(R.anim.anim_slide_out_left,
                                 R.anim.leftanim);
 
+                    }else  if (mIntent_Type.equalsIgnoreCase("Profession"))
+
+                    {
+                        i.putExtra(Common.Type,"PR");
+                        startActivity(i);
+                        overridePendingTransition(R.anim.anim_slide_out_left,
+                                R.anim.leftanim);
+
+                    }else  if (mIntent_Type.equalsIgnoreCase("Water"))
+
+                    {
+                        i.putExtra(Common.Type,"W");
+                        startActivity(i);
+                        overridePendingTransition(R.anim.anim_slide_out_left,
+                                R.anim.leftanim);
+
+                    }else  if (mIntent_Type.equalsIgnoreCase("NonTax"))
+
+                    {
+                        Intent i_nontax = new Intent(getApplicationContext(), NewAssessment.class);
+                        startActivity(i_nontax);
+                        overridePendingTransition(R.anim.anim_slide_out_left,
+                                R.anim.leftanim);
+
                     }
+
+
+
                 } else
                     Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
 
