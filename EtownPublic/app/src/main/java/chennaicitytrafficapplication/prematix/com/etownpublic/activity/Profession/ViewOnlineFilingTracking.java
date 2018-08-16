@@ -48,7 +48,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
-import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.TRACKNEWASSESSMENT;
+import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_TRACKNEWASSESSMENT;
 
 public class ViewOnlineFilingTracking extends AppCompatActivity {
 
@@ -169,7 +169,7 @@ public class ViewOnlineFilingTracking extends AppCompatActivity {
 
         String retDate = formatdate(reqDate);
 
-        String url = TRACKNEWASSESSMENT+"Type=SinglePTFiling&MobileNo="+mobileNo+"&" +
+        String url = API_TRACKNEWASSESSMENT+"Type=SinglePTFiling&MobileNo="+mobileNo+"&" +
                 "RequestNo="+requestNo+"&RequestDate="+retDate+"&District="+district+"&Panchayat="+panchayat;
 
         Log.e("ooo","---"+url);

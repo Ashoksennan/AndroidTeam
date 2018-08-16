@@ -38,7 +38,7 @@ public class Common {
 
   public static String API_ONLINE_FILING_SAVE=baseUrl+"EPSProfessionOnline?District=";
 
-  public static String TRACKNEWASSESSMENT=baseUrl+"EPSTrackingRequest?";
+  public static String API_TRACKNEWASSESSMENT=baseUrl+"EPSTrackingRequest?";
 
   public static boolean isNetworkAvailable(final Context context) {
     final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
