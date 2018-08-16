@@ -87,6 +87,11 @@
     <string name="err_msg_totalarea">Enter Total Area</string>
     <string name="err_msg_blocation">Enter Building Location</string>
     <string name="New_Assessment">New Assessment</string>
+    <string name="tracnewassessment_AssessmentType">AssessmentType</string>
+    <string name="assessment_txt_designationname">Designation Name</string>
+    <string name="assessment_txt_organisationname">Organisation Name</string>
+    <string name="assessment_txt_organisationcode">Organisation Code</string>
+    <string name="assessment_txt_trade_name">TradeName</string>
 
 
     <string-array name="stepLabels_BirthRegistration">
@@ -96,29 +101,5 @@
 
     </string-array>
 
-
-    <string name="nametransafer">Name Transfer</string>
-    <string name="mobileno">Mobile No</string>
-    <string name="emailId">Email Id</string>
-    <string name="trname">Transfer Name</string>
-    <string name="reg_doc">Registration Document</string>
-    <string name="upload">Upload</string>
-
-    <string name="choosefile">Choose File</string>
-    <string name="name_legel_doc">Name Legal Document</string>
-    <string name="death_certificate">Death Certificate </string>
-    <string name="property_name_transfer">Name Transfer</string>
-    <string name="profession_online_filing">Online Filing</string>
-
-    <string name="financial_year">Financial Year</string>
-    <string name="name">Name</string>
-    <string name="tax_no">Tax No</string>
-    <string name="door_no">Door No</string>
-    <string name="wardno">Ward No</string>
-    <string name="org_name">Organisation Name</string>
-    <string name="save">Save</string>
-    <string name="profession_track_online_filing">Track Online Filing</string>
-
-    <string name="track_online_filing">Track Online Filing</string>
 
 </resources>

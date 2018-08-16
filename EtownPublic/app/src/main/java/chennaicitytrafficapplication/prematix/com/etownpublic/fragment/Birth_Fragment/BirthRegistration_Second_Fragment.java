@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -40,8 +41,6 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitIns
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper;
 import chennaicitytrafficapplication.prematix.com.etownpublic.listener.RecyclerClickListener;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.HospitalBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
@@ -56,13 +55,14 @@ import retrofit2.Response;
 public class BirthRegistration_Second_Fragment extends Fragment implements Validator.ValidationListener {
     View v;
     Typeface avvaiyarfont;
+
     Validator validator;
     SpinnerDialog spinnerDialog;
     public final String TAG = BirthRegistration_Second_Fragment.class.getSimpleName();
 
     //Hospital List
-    List<HospitalBean> mhospitalBeanslist = new ArrayList<>();
-    ArrayList<Street_Pojo> mstreetBeansList = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.HospitalBean> mhospitalBeanslist = new ArrayList<>();
+    ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo> mstreetBeansList = new ArrayList<>();
 
     //String Hospital list
     ArrayList<String> mhospitalStringList = new ArrayList<>();
@@ -87,6 +87,9 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
     @NotEmpty
     @Nullable
     @BindView(R.id.btn_next_second)Button btn_next_second;
+
+    @Nullable
+    @BindView(R.id.li_parent_lay)LinearLayout li_parent_lay;
 
     //String declarations
     public String selected_district;
@@ -157,7 +160,8 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
                if(selected_ward!=null){
                        getStreetName();
                }else{
-                   Toast.makeText(getActivity(), "Please select the ward!!", Toast.LENGTH_SHORT).show();
+//                   Toast.makeText(getActivity(), "Please select the ward!!", Toast.LENGTH_SHORT).show();
+                   Snackbar.make(li_parent_lay,"Please select the ward!!",Snackbar.LENGTH_SHORT).show();
                }
 
             }
@@ -200,7 +204,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
                         if(streetArray.length()>0){
                             for(int i=0;i<streetArray.length();i++){
                                 JSONObject streetObjects = streetArray.getJSONObject(i);
-                                mstreetBeansList.add(new Street_Pojo(streetObjects.getString("StreetName"),streetObjects.getString("StreetNo")));
+                                mstreetBeansList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo(streetObjects.getString("StreetName"),streetObjects.getString("StreetNo")));
                                 mstreetStringList.add(streetObjects.getString("StreetName"));
                             }
                             for(int k=0;k<mstreetBeansList.size();k++){
@@ -315,8 +319,8 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
                         if(hospitalArray.length()>0){
                             for(int i=0;i<hospitalArray.length();i++){
                                 JSONObject hospitalObjects = hospitalArray.getJSONObject(i);
-                                mhospitalBeanslist.add(new HospitalBean(hospitalObjects.getInt("HospitalCode"),hospitalObjects.getString("HospitalName")));
-                                mhospitalStringList.add(hospitalObjects.getString("HospitalName"));
+                                mhospitalBeanslist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.HospitalBean(hospitalObjects.optInt("HospitalCode"),hospitalObjects.optString("HospitalName")));
+                                mhospitalStringList.add(hospitalObjects.optString("HospitalName"));
                             }
                             pd.dismiss();
                             setSpinnerHospital(mhospitalStringList);
@@ -408,7 +412,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
                         if(streetArray.length()>0){
                             for(int i=0;i<streetArray.length();i++){
                                 JSONObject streetObjects = streetArray.getJSONObject(i);
-                                mstreetBeansList.add(new Street_Pojo(streetObjects.getString("StreetName"),streetObjects.getString("StreetNo")));
+                                mstreetBeansList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo(streetObjects.getString("StreetName"),streetObjects.getString("StreetNo")));
                                 mstreetStringList.add(streetObjects.getString("StreetName"));
                             }
                             pd.dismiss();
@@ -441,7 +445,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"Hospital",String.valueOf(Math.round(selected_hospital_code)),selected_district,selected_panchayat);
+        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"Hospital",String.valueOf((int)Math.round(selected_hospital_code)),selected_district,selected_panchayat);
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -492,7 +496,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
         });
     }
 
-    public void showStreetValuesInAlert(final ArrayList<Street_Pojo> data_list) {
+    public void showStreetValuesInAlert(final ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo> data_list) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View v2 = getLayoutInflater().inflate(R.layout.recycler_alert, null);
@@ -508,7 +512,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
 
 
 
-        RecyclerView recyclerView = v2.findViewById(R.id.recycler);
+        RecyclerView recyclerView = (RecyclerView) v2.findViewById(R.id.recycler);
         if (recyclerView != null) {
             recyclerView.setHasFixedSize(true);
         }
@@ -541,7 +545,7 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
     @Override
     public void onValidationSucceeded() {
         sharedPreferenceHelpher.putPlaceofBirth(et_placeofbirth.getText().toString(),
-                                                String.valueOf(Math.round(selected_hospital_code)),
+                                                String.valueOf((int)Math.round(selected_hospital_code)),
 
                                                 et_hospname.getText().toString(),
                                                 et_doorno.getText().toString(),
@@ -567,7 +571,8 @@ public class BirthRegistration_Second_Fragment extends Fragment implements Valid
                 view.requestFocus();
 
             }else{
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Snackbar.make(li_parent_lay,message,Snackbar.LENGTH_SHORT).show();
             }
         }
     }

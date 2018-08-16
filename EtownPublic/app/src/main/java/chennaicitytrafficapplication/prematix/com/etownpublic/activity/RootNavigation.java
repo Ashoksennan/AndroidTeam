@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +17,7 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Death_Mod
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Registration;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Track;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.NonTax.NewAssessment;
-import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.OnlineFiling;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.AssessmentSearch;
-import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.NameTransfer;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PaidHistory;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PropertyTaxCalculator_Activity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Birth_Death.BirthAbstract_Activity;
@@ -153,6 +150,8 @@ public class RootNavigation extends AppCompatActivity {
                     mlinear_CertificateSearch.setVisibility(View.VISIBLE);
                     mlinear_deathTrack.setVisibility(View.VISIBLE);
                     mlinear_birth_deathAbstract.setVisibility(View.VISIBLE);
+
+
                     mtextView_birth_deathRegistration.setText(R.string.Death_apply_death_registration);
                     mtextView_birth_deathAbstract.setText(R.string.Death_track_abstract);
                     mtextView_deathTrack.setText(R.string.Death_track_death_registration);
@@ -441,22 +440,10 @@ public class RootNavigation extends AppCompatActivity {
 
                 if (Common.isNetworkAvailable(getApplicationContext())) {
 
-                    Intent i = new Intent(getApplicationContext(), NameTransfer.class);
-                    startActivity(i);
-
                 } else
                     Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
 
 
-            }
-        });
-
-        mlinear_OnlineFilling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(getApplicationContext(), OnlineFiling.class);
-                startActivity(i);
             }
         });
 
@@ -589,6 +576,7 @@ public class RootNavigation extends AppCompatActivity {
                             break;
                         }
                         case "Profession": {
+                            tracknewassessment.putExtra("Tax_Type", "Profession");
 
                             startActivity(tracknewassessment);
 

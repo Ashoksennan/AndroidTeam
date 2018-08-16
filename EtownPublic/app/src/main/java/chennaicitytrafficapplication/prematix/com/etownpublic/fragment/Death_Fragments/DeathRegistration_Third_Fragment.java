@@ -1,11 +1,11 @@
 package chennaicitytrafficapplication.prematix.com.etownpublic.fragment.Death_Fragments;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,19 +41,16 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Disease;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+
+/**
+ * Created by priyadharshini on 31/07/2018.
+ */
 
 public class DeathRegistration_Third_Fragment extends Fragment implements Validator.ValidationListener {
     public static final String TAG = DeathRegistration_Third_Fragment.class.getSimpleName();
@@ -80,6 +76,9 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
 
     @Nullable
     @BindView(R.id.et_type_atten_death)EditText et_type_atten_death;
+
+    @Nullable
+    @BindView(R.id.li_parent_lay)LinearLayout li_parent_lay;
 
     @Nullable
     @BindView(R.id.et_act_disease)EditText et_act_disease;
@@ -150,14 +149,14 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
     String selected_district,selected_panchayat,string_town_village;
 
     //Bean declarations
-    public List<StateBean> stateBeanlist = new ArrayList<>();
-    public List<Districts> stateDistrictBeanlist = new ArrayList<>();
-    public List<Town> townBeanlist = new ArrayList<>();
-    public List<RelegionBean> religionBeanlist = new ArrayList<>();
-    public List<EducationBean> educationBeanlist = new ArrayList<>();
-    public List<OccupationBean> occupationBeanlist = new ArrayList<>();
-    public ArrayList<Delivery> atntypeBeanList = new ArrayList<>();
-    public ArrayList<Disease> diseasetypeBeanList = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean> stateBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> stateDistrictBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town> townBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean> religionBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean> educationBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean> occupationBeanlist = new ArrayList<>();
+    public ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery> atntypeBeanList = new ArrayList<>();
+    public ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Disease> diseasetypeBeanList = new ArrayList<>();
 
     //String list declarations
     public ArrayList<String> statestringlist = new ArrayList<>();
@@ -486,7 +485,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"DistrictTown",String.valueOf(Math.round(stateCode)),String.valueOf(Math.round(district_code)),"");
+        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"DistrictTown",String.valueOf((int)Math.round(stateCode)),String.valueOf((int)Math.round(district_code)),"");
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -501,7 +500,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(townArray.length()>0){
                             for(int i=0;i<townArray.length();i++){
                                 JSONObject townObjects = townArray.getJSONObject(i);
-                                townBeanlist.add(new Town(townObjects.getInt("TownCode"),townObjects.getString("TownName")));
+                                townBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town(townObjects.getInt("TownCode"),townObjects.getString("TownName")));
                                 townStringList.add(townObjects.getString("TownName"));
                             }
                             pd.dismiss();
@@ -512,7 +511,8 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         }
                     }
                     pd.dismiss();
-                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Data not found",Snackbar.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     pd.dismiss();
@@ -551,7 +551,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(religionArray.length()>0){
                             for(int i=0;i<religionArray.length();i++){
                                 JSONObject religionObjects = religionArray.getJSONObject(i);
-                                religionBeanlist.add(new RelegionBean(religionObjects.getInt("ReligionCode"),religionObjects.getString("ReligionDescription")));
+                                religionBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean(religionObjects.getInt("ReligionCode"),religionObjects.getString("ReligionDescription")));
                                 religionStringList.add(religionObjects.getString("ReligionDescription"));
                             }
                         }
@@ -559,7 +559,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(educationArray.length()>0){
                             for(int i=0;i<educationArray.length();i++){
                                 JSONObject educationObject = educationArray.getJSONObject(i);
-                                educationBeanlist.add(new EducationBean(educationObject.getInt("EducationCode"),educationObject.getString("EducationDescription")));
+                                educationBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean(educationObject.getInt("EducationCode"),educationObject.getString("EducationDescription")));
                                 educationStringList.add(educationObject.getString("EducationDescription"));
                             }
                         }
@@ -567,7 +567,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(occupationArray.length()>0){
                             for(int i=0;i<occupationArray.length();i++){
                                 JSONObject occupationObject = occupationArray.getJSONObject(i);
-                                occupationBeanlist.add(new OccupationBean(occupationObject.getInt("OccupationCode"),occupationObject.getString("OccupationDescription")));
+                                occupationBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean(occupationObject.getInt("OccupationCode"),occupationObject.getString("OccupationDescription")));
                                 occupationStringList.add(occupationObject.getString("OccupationDescription"));
                             }
                         }
@@ -575,7 +575,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(delatnArray.length()>0){
                             for(int i=0;i<delatnArray.length();i++){
                                 JSONObject delatnObject = delatnArray.getJSONObject(i);
-                                atntypeBeanList.add(new Delivery(delatnObject.getInt("DelAtnCode"),delatnObject.getString("DelAtnDescription")));
+                                atntypeBeanList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery(delatnObject.getInt("DelAtnCode"),delatnObject.getString("DelAtnDescription")));
                                 atntypeList.add(delatnObject.getString("DelAtnDescription"));
                             }
                         }
@@ -583,7 +583,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(stateArray.length()>0){
                             for(int i=0;i<stateArray.length();i++){
                                 JSONObject stateObjects = stateArray.getJSONObject(i);
-                                stateBeanlist.add(new StateBean(stateObjects.getInt("StateCode"),stateObjects.getString("StateName")));
+                                stateBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean(stateObjects.getInt("StateCode"),stateObjects.getString("StateName")));
                                 statestringlist.add(stateObjects.getString("StateName"));
                             }
 
@@ -593,7 +593,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(diseaseArray.length()>0){
                             for(int i=0;i<diseaseArray.length();i++){
                                 JSONObject diseaseObjects = diseaseArray.getJSONObject(i);
-                                diseasetypeBeanList.add(new Disease(diseaseObjects.getInt("DiseaseCode"),diseaseObjects.getString("DiseaseDescription")));
+                                diseasetypeBeanList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Disease(diseaseObjects.getInt("DiseaseCode"),diseaseObjects.getString("DiseaseDescription")));
                                 diseasetypeList.add(diseaseObjects.getString("DiseaseDescription"));
                             }
 
@@ -608,7 +608,8 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
 
                     }else{
                         pd.dismiss();
-                        Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(li_parent_lay,"Data not found",Snackbar.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -705,7 +706,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"StateDistrict",String.valueOf(Math.round(stateCode)),selected_district,selected_panchayat);
+        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"StateDistrict",String.valueOf((int)Math.round(stateCode)),selected_district,selected_panchayat);
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -720,7 +721,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(districtArray.length()>0){
                             for(int i=0;i<districtArray.length();i++){
                                 JSONObject streetObjects = districtArray.getJSONObject(i);
-                                stateDistrictBeanlist.add(new Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
+                                stateDistrictBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
                                 stateDistrictstringlist.add(streetObjects.getString("DistrictName"));
                             }
                             pd.dismiss();
@@ -822,7 +823,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
     public void deathSaveApi(){
        String nameT_v = null;
         if(et_town_village.getText().toString().equalsIgnoreCase("Town")){
-            nameT_v = String.valueOf(Math.round(town_code));
+            nameT_v = String.valueOf((int)Math.round(town_code));
         }else if(et_town_village.getText().toString().equalsIgnoreCase("Village")){
             nameT_v = et_town_villageName.getText().toString();
         }
@@ -834,10 +835,10 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
         Call districtresult = retrofitInterface.saveDeathDetails(Common.ACCESS_TOKEN,selected_district,selected_panchayat,mobileNo,emailId,dOD,
                 gender,age,ageType,deseasedName,husbandwifename,fatherName,motherName,deathAddress,deathPincode,perAddress,
                 PerPincode,deathPlace,hospitalCode,hospitalName,
-                doorNo,wardNo,streetCode,streetName,otheraddress,otherpincode,String.valueOf(Math.round(stateCode)),
-                String.valueOf(Math.round(district_code)),et_town_village.getText().toString(),nameT_v,
-                String.valueOf(Math.round(religion_code)),"",String.valueOf(Math.round(father_occ_code)),
-                et_type_atten_death.getText().toString(),mMedically_certified, String.valueOf(Math.round(diceasecode)),mispregnant,msmoke,
+                doorNo,wardNo,streetCode,streetName,otheraddress,otherpincode,String.valueOf((int)Math.round(stateCode)),
+                String.valueOf((int)Math.round(district_code)),et_town_village.getText().toString(),nameT_v,
+                String.valueOf((int)Math.round(religion_code)),"",String.valueOf((int)Math.round(father_occ_code)),
+                et_type_atten_death.getText().toString(),mMedically_certified, String.valueOf((int)Math.round(diceasecode)),mispregnant,msmoke,
                 et_year_smoking.getText().toString(),mchew_toboco,et_year_Chew_Tobacco.getText().toString(),marecaunt,et_year_Chew_arecaunt.getText().toString(),malcohol,et_year_alcohol.getText().toString(),"Android");
         districtresult.enqueue(new Callback() {
             @Override
@@ -851,12 +852,14 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                     Log.e("response=>",resp);
                     pd.dismiss();
                     if(resp.startsWith("Success")){
-                        Toast.makeText(getActivity(),"Registered successfully!!",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(),"Registered successfully!!",Toast.LENGTH_SHORT).show();
+                        Snackbar.make(li_parent_lay,"Registered successfully!!",Snackbar.LENGTH_SHORT).show();
 //                        sendMessage("9952102045",resp);
                         Intent intent = new Intent(getActivity(),DeathRegistration_Activity.class);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+                        Snackbar.make(li_parent_lay,resp,Snackbar.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
                    Log.e("resulttt",records.toString());
@@ -898,9 +901,11 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
           @Override
           public void onResponse(String response) {
                 if(response.equalsIgnoreCase("Success")){
-                    Toast.makeText(getActivity(), "SMS sent successfully", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "SMS sent successfully", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"SMS sent successfully",Snackbar.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getActivity(), "Track your status using mobile number", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Track your status using mobile number", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Track your status using mobile number",Snackbar.LENGTH_SHORT).show();
                 }
               dialog.dismiss();
           }
@@ -952,7 +957,8 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                 view.requestFocus();
 
             }else{
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Snackbar.make(li_parent_lay,message,Snackbar.LENGTH_SHORT).show();
             }
         }
     }

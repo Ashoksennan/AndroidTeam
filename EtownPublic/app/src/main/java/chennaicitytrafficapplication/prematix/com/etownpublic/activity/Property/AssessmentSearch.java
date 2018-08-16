@@ -109,6 +109,7 @@ public class AssessmentSearch extends AppCompatActivity {
 
         initViews();
 
+
         sharedPreference = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (!sharedPreference.getString(PREF_SELECTDISTRICT, "").isEmpty()) {
             etDistrict.setText(sharedPreference.getString(PREF_SELECTDISTRICT, ""));

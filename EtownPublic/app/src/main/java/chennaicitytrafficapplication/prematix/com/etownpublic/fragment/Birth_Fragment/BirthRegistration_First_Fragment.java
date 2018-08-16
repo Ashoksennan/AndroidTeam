@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,17 +44,12 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.DateSelect;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * Created by priyadharshini on 31/07/2018.
- */
 
 public class BirthRegistration_First_Fragment extends Fragment implements
         Validator.ValidationListener{
@@ -112,13 +109,15 @@ public class BirthRegistration_First_Fragment extends Fragment implements
     @BindView(R.id.btn_next) Button btn_next;
     @Nullable
     @BindView(R.id.check_above_address) CheckBox check_above_address;
+    @Nullable
+    @BindView(R.id.li_parent_lay) LinearLayout li_parent_lay;
 
     //List
     ArrayList<String> mDistrictsList = new ArrayList<>();
     ArrayList<String> mPanchayatsList = new ArrayList<>();
 
-    List<Districts> mPanchayatList = new ArrayList<>();
-    List<Districts> mDistrictList = new ArrayList();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mPanchayatList = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mDistrictList = new ArrayList();
 
 
 
@@ -178,7 +177,7 @@ public class BirthRegistration_First_Fragment extends Fragment implements
                 if(districtid!=0){
                     getPanchayat();
                 }else{
-                    Toast.makeText(getActivity(), "Please select the District!!", Toast.LENGTH_SHORT).show();
+               Snackbar.make(li_parent_lay,"Please select the District!!",Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -247,7 +246,7 @@ public class BirthRegistration_First_Fragment extends Fragment implements
                             String districtname = jsonObject.getString("DistrictName");
                             Log.e(TAG,jsonObject.getString("DistrictName"));
                             mDistrictsList.add(districtname);
-                            mDistrictList.add(new Districts(districtid,districtname));
+                            mDistrictList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(districtid,districtname));
                         }
                         pd.dismiss();
                         setSpinnerDistrict(mDistrictsList);
@@ -336,7 +335,7 @@ public class BirthRegistration_First_Fragment extends Fragment implements
                             String panchayatName = jsonObject.getString("PanchayatName");
                             Log.e(TAG,jsonObject.getString("PanchayatName"));
                             mPanchayatsList.add(panchayatName);
-                            mPanchayatList.add(new Districts(panchayatid,panchayatName));
+                            mPanchayatList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(panchayatid,panchayatName));
                         }
                         pd.dismiss();
                         setSpinnerPanchayat(mPanchayatsList);
@@ -361,7 +360,8 @@ public class BirthRegistration_First_Fragment extends Fragment implements
 
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+        Snackbar.make(li_parent_lay,"Success",Snackbar.LENGTH_SHORT).show();
         sharedPreferenceHelpher.putParentalInfo(et_district.getText().toString(),
                                                 et_panchayat.getText().toString(),
                                                 et_mobileno.getText().toString(),
@@ -374,7 +374,7 @@ public class BirthRegistration_First_Fragment extends Fragment implements
                                                 et_pincode.getText().toString(),
                                                 et_per_permanent_address.getText().toString(),
                                                 et_per_pincode.getText().toString(),
-                                                et_dob.getText().toString(),
+                                                parseDate(et_dob.getText().toString(), "dd/MM/yyyy", "yyyy-MM-dd"),
                                                 selectedGender,
                                                 et_childname.getText().toString()
 
@@ -398,8 +398,31 @@ public class BirthRegistration_First_Fragment extends Fragment implements
                 view.requestFocus();
 
             }else{
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Snackbar.make(li_parent_lay,message,Snackbar.LENGTH_SHORT).show();
             }
         }
     }
+
+    public String parseDate(String date, String givenformat, String resultformat) {
+
+        String result = "";
+        SimpleDateFormat sdf;
+        SimpleDateFormat sdf1;
+
+        try {
+            sdf = new SimpleDateFormat(givenformat);
+            sdf1 = new SimpleDateFormat(resultformat);
+            result = sdf1.format(sdf.parse(date));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        } finally {
+            sdf = null;
+            sdf1 = null;
+        }
+        return result;
+    }
+
 }

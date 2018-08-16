@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class TrackBirthRegistration_Adapter extends RecyclerView.Adapter<TrackBi
         viewHolder.tv_gender.setText(beanlist.get(i).getmGender());
         viewHolder.tv_birthplace.setText(beanlist.get(i).getmBirthPlace());
         viewHolder.tv_status.setText(beanlist.get(i).getmStatus());
+        Log.e("length=>",beanlist.size()+"");
         viewHolder.tv_requestNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

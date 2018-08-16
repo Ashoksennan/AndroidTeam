@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
 
     public String TAG = SplashScreen.class.getName();
     // Splash screen timer
-    private static final int SPLASH_TIME_OUT = 3000;
+    private static final int SPLASH_TIME_OUT = 7000;
     boolean value;
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override

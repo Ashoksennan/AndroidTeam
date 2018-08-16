@@ -34,11 +34,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.SharedBean.TrackAssmentNoEntity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.SharedAdapter.TrackAssessmentAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.SharedBean.TrackAssmentNoEntity;
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_NEW_TRACK_ASSESSMENTORCONNECTION;
@@ -116,7 +116,7 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etMobileNo.length() > 0) {
+                if (etMobileNo.getText().toString().isEmpty()) {
 
 
                     if (Common.isNetworkAvailable(getApplicationContext())) {
@@ -154,6 +154,8 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                 break;
             case "Profession":
 
+                url = API_NEW_TRACK_ASSESSMENTORCONNECTION + "Type=Profession&MobileNo=" + mobileNo + "&RequestNo=&" +
+                        "RequestDate=&District=&Panchayat=";
 
                 break;
             case "NonTax":
@@ -195,6 +197,8 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                                         JSONObject jsonObject = (JSONObject) secondArray.get(j);
 
 
+
+
                                         String requestNo = jsonObject.getString("RequestNo");
                                         String requestDate = jsonObject.getString("RequestDate");
                                         String district = jsonObject.getString("District");
@@ -208,13 +212,19 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                                         String status = jsonObject.getString("Status");
 
 
+
+
+
+
+
+
                                         switch (mIntent_Type) {
                                             case "Property":
                                                 String leaseName = jsonObject.getString("BuildingLicenceNo");
                                                 String blockNo = jsonObject.getString("BlockNo");
 
                                                 entityList.add(new TrackAssmentNoEntity(requestNo, requestDate, district, panchayat, name,
-                                                        leaseName, blockNo, wardNo, streetName, status, mobileNo, emailId, mIntent_Type));
+                                                        leaseName, blockNo, wardNo, streetName, status, mobileNo, emailId, mIntent_Type,"","","",""));
 
                                                 break;
 
@@ -223,7 +233,7 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                                                 String connectionType = jsonObject.getString("ConnectionType");
                                                 String doorNo = jsonObject.getString("DoorNo");
                                                 entityList.add(new TrackAssmentNoEntity(requestNo, requestDate, district, panchayat, name,
-                                                        connectionType, doorNo, wardNo, streetName, status, mobileNo, emailId, mIntent_Type));
+                                                        connectionType, doorNo, wardNo, streetName, status, mobileNo, emailId, mIntent_Type,"","","",""));
 
 
                                                 break;
@@ -232,7 +242,27 @@ public class TrackNewAssessmentNo extends AppCompatActivity {
                                                 String lease_name = jsonObject.getString("LeaseName");
                                                 String non_Tax_doorno = jsonObject.getString("DoorNo");
                                                 entityList.add(new TrackAssmentNoEntity(requestNo, requestDate, district, panchayat, name,
-                                                        lease_name, non_Tax_doorno, wardNo, streetName, status, mobileNo, emailId, mIntent_Type));
+                                                        lease_name, non_Tax_doorno, wardNo, streetName, status, mobileNo, emailId, mIntent_Type,"","","",""));
+
+
+                                                break;
+
+                                            case "Profession":
+
+
+
+
+                                                String prof_TradeName = jsonObject.getString("TradeName");
+                                                String prof_OrganizationCode = jsonObject.getString("OrganizationCode");
+                                                String prof_OrganizationName = jsonObject.getString("OrganizationName");
+                                                String prof_DesignationName = jsonObject.getString("DesignationName");
+
+
+                                                String profession_assessmentType = jsonObject.getString("AssessmentType");
+                                                String profession_doorno = jsonObject.getString("DoorNo");
+                                                entityList.add(new TrackAssmentNoEntity(requestNo, requestDate, district, panchayat, name,
+                                                        profession_assessmentType, profession_doorno, wardNo, streetName,
+                                                        status, mobileNo, emailId, mIntent_Type,prof_TradeName,prof_OrganizationCode,prof_OrganizationName,prof_DesignationName));
 
 
                                                 break;

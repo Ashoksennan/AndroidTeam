@@ -1,25 +1,29 @@
 package chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,9 +39,10 @@ import java.util.List;
 import java.util.Map;
 
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
+import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.SharedAdapter.ApprovalAdapter;
+import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.model.SharedBean.ApprovalEntity;
-
 import dmax.dialog.SpotsDialog;
 
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_NEW_TRACK_ASSESSMENTORCONNECTION;
@@ -47,8 +52,11 @@ public class ViewTracking extends AppCompatActivity {
     String requestNo = "", mobileNo = "", emailId = "", district = "", panchayat = "", name = "", blNo = "", blockNo = "", wardNo = "",
             streetName = "", status = "", reqDate = "", Tax_Type;
 
-    TextView tvReqNo, tvMobileNo, tvEmailId, tvDistrict, tvPanchayat, tvName, tvBlNo, tvBlockNo, tvWardNo, tvStreetName, tvStatus, mconnectionType_or_txt_building_type, mblocktype_or_doorno;
+    TextView tvReqNo, tvMobileNo, tvEmailId, tvDistrict, tvPanchayat, tvName, tvBlNo, tvBlockNo, tvWardNo, tvStreetName,
+            tv_designationname,
 
+    title_tv_trade, title_tv_organisationcode, title_tv_organisationname, title_tv_designationname, tv_tradename, tv_organisationcode, tv_organisationname, tvStatus, mconnectionType_or_txt_building_type, mblocktype_or_doorno;
+        RelativeLayout rootlayout;
     RecyclerView recyclerViewApproval;
     String url;
     SpotsDialog progressDialog;
@@ -70,6 +78,7 @@ public class ViewTracking extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(R.string.toolbar_viewconnection);
 
+                rootlayout = (RelativeLayout)findViewById(R.id.rootlayout);
 
         tvReqNo = findViewById(R.id.txt_buildingblock_or_connectiontype);
         tvReqNo = findViewById(R.id.txt_block_or_doorno);
@@ -86,6 +95,18 @@ public class ViewTracking extends AppCompatActivity {
         tvStatus = findViewById(R.id.tv_status);
         mblocktype_or_doorno = findViewById(R.id.txt_block_or_doorno);
         linearApprovalStatus = findViewById(R.id.linear_approval_status_card);
+
+
+        tv_designationname = findViewById(R.id.assessment_designationname);
+        tv_tradename = findViewById(R.id.assessment_tradename);
+        tv_organisationcode = findViewById(R.id.assessment_organisationcode);
+        tv_organisationname = findViewById(R.id.assessment_organisationname);
+
+        title_tv_trade = findViewById(R.id.txt_tradename);
+        title_tv_organisationcode = findViewById(R.id.txt_organisationcode);
+        title_tv_organisationname = findViewById(R.id.txt_txt_organisationname);
+        title_tv_designationname = findViewById(R.id.txt_txt_designationname);
+
 
         mconnectionType_or_txt_building_type = findViewById(R.id.txt_buildingblock_or_connectiontype);
         recyclerViewApproval = findViewById(R.id.recyclerApproval);
@@ -108,6 +129,14 @@ public class ViewTracking extends AppCompatActivity {
             status = i.getStringExtra("status");
             reqDate = i.getStringExtra("reqDate");
             Tax_Type = i.getStringExtra("Tax_Type");
+
+
+                   if(blockNo.isEmpty()){
+                       mblocktype_or_doorno.setVisibility(View.GONE);
+                       tvBlockNo.setVisibility(View.GONE);
+
+                   }
+
             if (Tax_Type.equals("Water")) {
 
                 mblocktype_or_doorno.setText(R.string.tracknewassessment_viewtracking_doorno);
@@ -119,8 +148,51 @@ public class ViewTracking extends AppCompatActivity {
                 mblocktype_or_doorno.setText(R.string.tracknewassessment_viewtracking_doorno);
                 mconnectionType_or_txt_building_type.setText(R.string.tracknewassessment_viewtracking_leasename);
 
-            }
+            } else if (Tax_Type.equals("Profession")) {
 
+                String trade_name = Tax_Type = i.getStringExtra("TradeName");
+                String organizationCode_value = i.getStringExtra("OrganizationCode");
+                String organizationname_value = i.getStringExtra("OrganizationName");
+                String organizationdesig_value = i.getStringExtra("DesignationName");
+
+                mblocktype_or_doorno.setText(R.string.tracknewassessment_viewtracking_doorno);
+                mconnectionType_or_txt_building_type.setText(R.string.tracnewassessment_AssessmentType);
+
+
+
+                tv_designationname = findViewById(R.id.assessment_designationname);
+                tv_tradename = findViewById(R.id.assessment_tradename);
+                tv_organisationcode = findViewById(R.id.assessment_organisationcode);
+                tv_organisationname = findViewById(R.id.assessment_organisationname);
+
+
+
+
+                if (!trade_name.isEmpty()) {
+                    tv_tradename.setText(trade_name);
+                    tv_tradename.setVisibility(View.VISIBLE);
+                    title_tv_trade.setVisibility(View.VISIBLE);
+                }
+                if (!organizationname_value.isEmpty()) {
+                    tv_organisationname.setVisibility(View.VISIBLE);
+                    title_tv_organisationname.setVisibility(View.VISIBLE);
+
+                    tv_organisationname.setText(organizationname_value);
+                }
+                if (!organizationdesig_value.isEmpty()) {
+                    title_tv_designationname.setVisibility(View.VISIBLE);
+                    tv_designationname.setVisibility(View.VISIBLE);
+                    tv_designationname.setText(organizationdesig_value);
+
+                }
+                if (!organizationCode_value.isEmpty()) {
+                    tv_organisationcode.setText(organizationCode_value);
+
+                    tv_organisationcode.setVisibility(View.VISIBLE);
+                    title_tv_organisationcode.setVisibility(View.VISIBLE);
+
+                }
+            }
 
             tvReqNo.setText(requestNo);
             tvMobileNo.setText(mobileNo);
@@ -133,11 +205,13 @@ public class ViewTracking extends AppCompatActivity {
             tvWardNo.setText(wardNo);
             tvStreetName.setText(streetName);
             tvStatus.setText(status);
-            if (status.equalsIgnoreCase("Pending")) {
+            if (status.equalsIgnoreCase("Pending") || status.equalsIgnoreCase("Processed") ) {
                 linearApprovalStatus.setVisibility(View.GONE);
-            }
+            } else {
 
-            getApprovalStatus(mobileNo, requestNo, reqDate, district, panchayat);
+                getApprovalStatus(mobileNo, requestNo, reqDate, district, panchayat);
+
+            }
 
 
         }
@@ -159,12 +233,15 @@ public class ViewTracking extends AppCompatActivity {
         } else if (Tax_Type.equals("Water")) {
             url = API_NEW_TRACK_ASSESSMENTORCONNECTION + "Type=SingleWater&MobileNo=9600694856&RequestNo=27454&RequestDate=2018-08-09&District=Krishnagiri&Panchayat=Mathigiri";
 
+        } else if (Tax_Type.equals("Profession")) {
+            url = API_NEW_TRACK_ASSESSMENTORCONNECTION + "Type=SingleProfession&MobileNo=9600694856&RequestNo=27454&RequestDate=2018-08-09&District=Krishnagiri&Panchayat=Mathigiri";
+
+        } else if (Tax_Type.equals("NonTax")) {
+            url = API_NEW_TRACK_ASSESSMENTORCONNECTION + "Type=SingleNonTax&MobileNo=9600694856&RequestNo=27454&RequestDate=2018-08-09&District=Krishnagiri&Panchayat=Mathigiri";
+
         }
-
-
         Log.e("ooo", "---" + url);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(),
                 new Response.Listener<JSONObject>() {
@@ -177,17 +254,16 @@ public class ViewTracking extends AppCompatActivity {
                             JSONArray firstarray = new JSONArray(recoredSet.getString("recordsets"));
 
                             for (int i = 0; i < firstarray.length(); i++) {
-//
+
                                 JSONArray secondArray = firstarray.getJSONArray(0);
-//
+
                                 Log.e("insidearray", "----" + secondArray.toString());
 
                                 if (secondArray.length() > 0) {
-//
+
                                     for (int j = 0; j < secondArray.length(); j++) {
-//
+
                                         JSONObject jsonObject = (JSONObject) secondArray.get(j);
-//
                                         String requestNo = jsonObject.getString("RequestNo");
                                         String date = jsonObject.getString("Date");
                                         String remarks = jsonObject.getString("Remarks");
@@ -199,8 +275,6 @@ public class ViewTracking extends AppCompatActivity {
                                         Log.e("val", "----" + requestNo);
 //
                                     }
-
-                                    progressDialog.dismiss();
 
                                     approvalAdapter = new ApprovalAdapter(ViewTracking.this, approvalList);
 
@@ -215,9 +289,14 @@ public class ViewTracking extends AppCompatActivity {
                                     llApprovalStatus.setVisibility(View.GONE);
                                     Toast.makeText(getApplicationContext(), "No Approval Status Found", Toast.LENGTH_SHORT).show();
                                 }
+
+                                progressDialog.dismiss();
+
                             }
 
                         } catch (JSONException e) {
+                            progressDialog.dismiss();
+
                             e.printStackTrace();
                         }
                     }
@@ -226,30 +305,58 @@ public class ViewTracking extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.e("val", "----" + error.toString());
+                progressDialog.dismiss();
+                if (error instanceof AuthFailureError) {
+
+
+                    SnackShowTop("Connection Time out", rootlayout);
+
+                } else if (error instanceof ServerError) {
+
+                    SnackShowTop("Could not connect server", rootlayout);
+
+
+                } else if (error instanceof NetworkError) {
+
+
+                    SnackShowTop("Please check the internet connection", rootlayout);
+
+
+                } else if (error instanceof ParseError) {
+
+
+                    SnackShowTop("Parse Error", rootlayout);
+
+                } else {
+
+
+                    SnackShowTop(error.getMessage(), rootlayout);
+
+                }
 
             }
-
-
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("accesstoken", "eyJhbGciOiJIUzI1NiJ9.UHJlbWF0aXg.VnYf5L2bruAL3IhIbhOCnqW3SADSM2qjWrZAV0yrB94");
+                params.put("accesstoken", Common.ACCESS_TOKEN);
 
                 return params;
 
             }
         };
 
-        requestQueue.add(req);
-        req.setRetryPolicy(new DefaultRetryPolicy(
-                1000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(req, "API_NEW_TRACK_ASSESSMENTORCONNECTION");
 
-        progressDialog.dismiss();
 
+    }
+    private void SnackShowTop(String message, View view) {
+        Snackbar snack = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
+        View view_layout = snack.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view_layout.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view_layout.setLayoutParams(params);
+        snack.show();
     }
 
     public String formatdate(String fdate) {

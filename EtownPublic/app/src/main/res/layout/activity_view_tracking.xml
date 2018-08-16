@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/rootlayout"
     android:layout_height="match_parent"
    >
     <RelativeLayout
@@ -184,6 +185,55 @@
                                 android:fontFamily="@font/hoefler_text"
                                 android:textColor="@color/black" />
 
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/assessment_txt_trade_name"
+                                android:id="@+id/txt_tradename"
+                                               android:visibility="gone"
+                                android:textSize="14dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/hoefler_text"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/assessment_txt_organisationcode"
+                                android:id="@+id/txt_organisationcode"
+                                android:visibility="gone"
+                                android:textSize="14dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/hoefler_text"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/assessment_txt_organisationname"
+                                android:id="@+id/txt_txt_organisationname"
+                                android:visibility="gone"
+                                android:textSize="14dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/hoefler_text"
+                                android:textColor="@color/black" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/assessment_txt_designationname"
+                                android:id="@+id/txt_txt_designationname"
+                                android:visibility="gone"
+                                android:textSize="14dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/hoefler_text"
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -308,6 +358,52 @@
                                     android:layout_weight="1"
                                     android:text="222"
                                     android:id="@+id/tv_blockno"
+                                    android:textSize="14dp"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/hoefler_text"
+                                    android:textColor="@color/black" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="222"
+                                    android:visibility="gone"
+                                    android:id="@+id/assessment_tradename"
+                                    android:textSize="14dp"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/hoefler_text"
+                                    android:textColor="@color/black" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="222"
+                                    android:visibility="gone"
+                                    android:id="@+id/assessment_organisationcode"
+                                    android:textSize="14dp"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/hoefler_text"
+                                    android:textColor="@color/black" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="222"
+                                    android:visibility="gone"
+                                    android:id="@+id/assessment_organisationname"
+                                    android:textSize="14dp"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/hoefler_text"
+                                    android:textColor="@color/black" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="222"
+                                    android:visibility="gone"
+                                    android:id="@+id/assessment_designationname"
                                     android:textSize="14dp"
                                     android:layout_marginTop="8dp"
                                     android:fontFamily="@font/hoefler_text"

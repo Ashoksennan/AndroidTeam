@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
+    android:id="@+id/rootlayout"
     tools:context=".activity.BirthAbstract_Activity">
 
     <android.support.v7.widget.Toolbar
@@ -64,6 +65,7 @@
                             android:focusableInTouchMode="false"
                             android:fontFamily="@font/georgia"
                             android:hint="District"
+                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                             android:inputType="textNoSuggestions"
                             android:textAlignment="viewStart"
                             android:textSize="@dimen/fragment_body_text_size"
@@ -87,6 +89,8 @@
                             android:enabled="true"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
+                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+
                             android:fontFamily="@font/georgia"
                             android:hint="Town Panchayat"
                             android:inputType="textNoSuggestions"

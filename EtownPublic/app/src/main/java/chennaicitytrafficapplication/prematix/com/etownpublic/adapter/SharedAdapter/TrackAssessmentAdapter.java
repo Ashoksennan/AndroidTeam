@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.SharedBean.TrackAssmentNoEntity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.ViewTracking;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.SharedBean.TrackAssmentNoEntity;
 
 public class TrackAssessmentAdapter extends RecyclerView.Adapter<TrackAssessmentAdapter.MyViewHolder> {
 
@@ -54,6 +54,13 @@ public class TrackAssessmentAdapter extends RecyclerView.Adapter<TrackAssessment
             holder.tvBlNo.setText(Html.fromHtml("<b> LeaseName: </b> " + assmentNoEntity.getBlNo()));
 
         }
+        else if(assmentNoEntity.getTax_type().equals("Profession")){
+
+
+            holder.tvBlockNo.setText(Html.fromHtml("<b> Door no : </b> " + assmentNoEntity.getBlockNo()));
+            holder.tvBlNo.setText(Html.fromHtml("<b> AssessmentType: </b> " + assmentNoEntity.getBlNo()));
+
+        }
         holder.tvRequestNo.setText(Html.fromHtml("<b>Request No : </b> " + assmentNoEntity.getReqNo()));
         final String date[] = assmentNoEntity.getReqDate().split("T");
 
@@ -83,6 +90,11 @@ public class TrackAssessmentAdapter extends RecyclerView.Adapter<TrackAssessment
                 i.putExtra("status", assmentNoEntity.getStatus());
                 i.putExtra("reqDate", date[0]);
                 i.putExtra("Tax_Type", assmentNoEntity.getTax_type());
+                i.putExtra("TradeName", assmentNoEntity.getProf_TradeName());
+                i.putExtra("OrganizationCode", assmentNoEntity.getProf_OrganizationCode());
+                i.putExtra("OrganizationName", assmentNoEntity.getProf_OrganizationName());
+                i.putExtra("DesignationName", assmentNoEntity.getProf_DesignationName());
+
                 context.startActivity(i);
             }
         });

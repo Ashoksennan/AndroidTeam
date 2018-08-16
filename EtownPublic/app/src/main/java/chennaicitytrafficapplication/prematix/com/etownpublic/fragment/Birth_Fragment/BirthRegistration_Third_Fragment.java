@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -34,13 +35,6 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
@@ -102,6 +96,10 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
     @NotEmpty
     @Nullable
     @BindView(R.id.et_duration_pregnancy)EditText et_duration_pregnancy;
+
+    @Nullable
+    @BindView(R.id.li_parent_lay)LinearLayout li_parent_lay;
+
     @NotEmpty
     @Nullable
     @BindView(R.id.btn_final)Button btn_final;
@@ -121,13 +119,13 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
     public String selected_district,selected_panchayat,string_town_village;
 
     //Bean declarations
-    List<StateBean> mStateBeanlist = new ArrayList<>();
-    List<Districts> mStateDistrictBeanlist = new ArrayList<>();
-    List<Town> mTownBeanlist = new ArrayList<>();
-    List<RelegionBean> mReligionBeanlist = new ArrayList<>();
-    List<EducationBean> mEducationBeanlist = new ArrayList<>();
-    List<OccupationBean> mOccupationBeanlist = new ArrayList<>();
-    ArrayList<Delivery> mAtntypeBeanList = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean> mStateBeanlist = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mStateDistrictBeanlist = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town> mTownBeanlist = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean> mReligionBeanlist = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean> mEducationBeanlist = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean> mOccupationBeanlist = new ArrayList<>();
+    ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery> mAtntypeBeanList = new ArrayList<>();
 
     //String list declarations
     ArrayList<String> mStatestringlist = new ArrayList<>();
@@ -197,7 +195,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(stateCode!=0){
                     getDistricts();
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -229,8 +228,9 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         Log.e("xfhjfg","<=Village=>");
                         et_town_villageName.setClickable(true);
                     }
-                }else{
-                    Toast.makeText(getActivity(), "Please select the district!", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(getActivity(), "Please select the district!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the district!",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -241,7 +241,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mReligionStringList.size()>0){
                     setSpinnerReligion(mReligionStringList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -252,7 +253,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mEducationStringList.size()>0){
                     setSpinnerFatherEdu(mEducationStringList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -263,7 +265,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mEducationStringList.size()>0){
                     setSpinnerMotherEdu(mEducationStringList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -274,7 +277,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mOccupationStringList.size()>0){
                     setSpinnerFatherOccu(mOccupationStringList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -285,7 +289,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mOccupationStringList.size()>0){
                     setSpinnerMotherOccu(mOccupationStringList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -296,7 +301,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mDeliverymethodList.size()>0){
                     setSpinnerMethodDelivery(mDeliverymethodList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -307,7 +313,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 if(mAtntypeList.size()>0){
                     setSpinnerattendant(mAtntypeList);
                 }else{
-                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the state", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the state",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -328,7 +335,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"DistrictTown",String.valueOf(Math.round(stateCode)),String.valueOf(Math.round(district_code)),"");
+        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"DistrictTown",String.valueOf((int)Math.round(stateCode)),String.valueOf((int)Math.round(district_code)),"");
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -343,7 +350,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(townArray.length()>0){
                             for(int i=0;i<townArray.length();i++){
                                 JSONObject townObjects = townArray.getJSONObject(i);
-                                mTownBeanlist.add(new Town(townObjects.getInt("TownCode"),townObjects.getString("TownName")));
+                                mTownBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town(townObjects.getInt("TownCode"),townObjects.getString("TownName")));
                                 mTownStringList.add(townObjects.getString("TownName"));
                             }
                             pd.dismiss();
@@ -393,7 +400,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(religionArray.length()>0){
                             for(int i=0;i<religionArray.length();i++){
                                 JSONObject religionObjects = religionArray.getJSONObject(i);
-                                mReligionBeanlist.add(new RelegionBean(religionObjects.getInt("ReligionCode"),religionObjects.getString("ReligionDescription")));
+                                mReligionBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean(religionObjects.getInt("ReligionCode"),religionObjects.getString("ReligionDescription")));
                                 mReligionStringList.add(religionObjects.getString("ReligionDescription"));
                             }
                         }
@@ -401,7 +408,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(educationArray.length()>0){
                             for(int i=0;i<educationArray.length();i++){
                                 JSONObject educationObject = educationArray.getJSONObject(i);
-                                mEducationBeanlist.add(new EducationBean(educationObject.getInt("EducationCode"),educationObject.getString("EducationDescription")));
+                                mEducationBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean(educationObject.getInt("EducationCode"),educationObject.getString("EducationDescription")));
                                 mEducationStringList.add(educationObject.getString("EducationDescription"));
                             }
                         }
@@ -409,7 +416,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(occupationArray.length()>0){
                             for(int i=0;i<occupationArray.length();i++){
                                 JSONObject occupationObject = occupationArray.getJSONObject(i);
-                                mOccupationBeanlist.add(new OccupationBean(occupationObject.getInt("OccupationCode"),occupationObject.getString("OccupationDescription")));
+                                mOccupationBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.OccupationBean(occupationObject.getInt("OccupationCode"),occupationObject.getString("OccupationDescription")));
                                 mOccupationStringList.add(occupationObject.getString("OccupationDescription"));
                             }
                         }
@@ -417,7 +424,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(delatnArray.length()>0){
                             for(int i=0;i<delatnArray.length();i++){
                                 JSONObject delatnObject = delatnArray.getJSONObject(i);
-                                mAtntypeBeanList.add(new Delivery(delatnObject.getInt("DelAtnCode"),delatnObject.getString("DelAtnDescription")));
+                                mAtntypeBeanList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Delivery(delatnObject.getInt("DelAtnCode"),delatnObject.getString("DelAtnDescription")));
                                 mAtntypeList.add(delatnObject.getString("DelAtnDescription"));
                             }
                         }
@@ -425,7 +432,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(stateArray.length()>0){
                             for(int i=0;i<stateArray.length();i++){
                                 JSONObject stateObjects = stateArray.getJSONObject(i);
-                                mStateBeanlist.add(new StateBean(stateObjects.getInt("StateCode"),stateObjects.getString("StateName")));
+                                mStateBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean(stateObjects.getInt("StateCode"),stateObjects.getString("StateName")));
                                 mStatestringlist.add(stateObjects.getString("StateName"));
                             }
 
@@ -518,7 +525,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"StateDistrict",String.valueOf(Math.round(stateCode)),selected_district,selected_panchayat);
+        Call districtresult = retrofitInterface.getMasterDetails(Common.ACCESS_TOKEN,"StateDistrict",String.valueOf((int)Math.round(stateCode)),selected_district,selected_panchayat);
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -533,7 +540,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                         if(districtArray.length()>0){
                             for(int i=0;i<districtArray.length();i++){
                                 JSONObject streetObjects = districtArray.getJSONObject(i);
-                                mStateDistrictBeanlist.add(new Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
+                                mStateDistrictBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
                                 mStateDistrictstringlist.add(streetObjects.getString("DistrictName"));
                             }
                             pd.dismiss();
@@ -702,7 +709,7 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
     public void birthSaveApi(){
        String nameT_v = null;
         if(et_town_village.getText().toString().equalsIgnoreCase("Town")){
-            nameT_v = String.valueOf(Math.round(town_code));
+            nameT_v = String.valueOf((int)Math.round(town_code));
         }else if(et_town_village.getText().toString().equalsIgnoreCase("Village")){
             nameT_v = et_town_villageName.getText().toString();
         }
@@ -714,15 +721,16 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
         Call districtresult = retrofitInterface.saveBirthDetails(Common.ACCESS_TOKEN,selected_district,selected_panchayat,mMobileNo,mEmailId,mDOB,
                 mGender,mChildName,mFatherName,mMotherName,mFatherAadhaarNo,mMotherAadhaarNo,mPerAddress,
                 mPerPincode,mBirthAddress,mBirthPincode,mBirthPlace,mHospitalCode,mHospitalName,
-                mDoorNo,mWardNo,mStreetCode,mStreetName,String.valueOf(Math.round(stateCode)),
-                String.valueOf(Math.round(district_code)),et_town_village.getText().toString(),nameT_v,
-                String.valueOf(Math.round(religion_code)),"",String.valueOf(Math.round(father_edu_code)),String.valueOf(Math.round(mother_edu_code)),String.valueOf(Math.round(father_occ_code)),String.valueOf(Math.round(mother_occ_code)),
+                mDoorNo,mWardNo,mStreetCode,mStreetName,String.valueOf((int)Math.round(stateCode)),
+                String.valueOf((int)Math.round(district_code)),et_town_village.getText().toString(),nameT_v,
+                String.valueOf((int)Math.round(religion_code)),"",String.valueOf((int)Math.round(father_edu_code)),String.valueOf((int)Math.round(mother_edu_code)),String.valueOf((int)Math.round(father_occ_code)),String.valueOf((int)Math.round(mother_occ_code)),
                 et_mother_age_marriage.getText().toString(),et_mother_age_birth.getText().toString(),et_no_children_alive.getText().toString(),et_child_weight.getText().toString(),et_method_delivery.getText().toString(),
-                String.valueOf(Math.round(attn_code)),et_duration_pregnancy.getText().toString(),"Android");
+                String.valueOf((int)Math.round(attn_code)),et_duration_pregnancy.getText().toString(),"Android");
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 Log.e("fgd",response.toString());
+                Log.e("url==>",response.raw().toString());
                 String response1 = new Gson().toJson(response.body());
                 Log.e("result",response1);
                 try {
@@ -731,12 +739,14 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                     Log.e("response=>",resp);
                     pd.dismiss();
                     if(resp.startsWith("Success")){
-                        Toast.makeText(getActivity(),"Registered successfully!!",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(),"Registered successfully!!",Toast.LENGTH_SHORT).show();
+                        Snackbar.make(li_parent_lay,"Registered successfully!!",Snackbar.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(),BirthRegistration_Activity.class);
                         startActivity(intent);
 //                        sendMessage("9952102045",resp);
                     }else{
-                        Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+                        Snackbar.make(li_parent_lay,resp,Snackbar.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
                    Log.e("resulttt",records.toString());
@@ -777,7 +787,8 @@ public class BirthRegistration_Third_Fragment extends Fragment implements Valida
                 view.requestFocus();
 
             }else{
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Snackbar.make(li_parent_lay,message,Snackbar.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         }
     }

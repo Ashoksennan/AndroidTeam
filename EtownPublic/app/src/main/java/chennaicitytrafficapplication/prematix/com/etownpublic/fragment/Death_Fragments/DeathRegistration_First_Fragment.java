@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -27,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,6 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.DateSelect;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.SharedPreferenceHelper;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
@@ -114,6 +115,9 @@ public class DeathRegistration_First_Fragment extends Fragment implements
     @Nullable
     @BindView(R.id.et_deathdate) EditText et_deathdate;
 
+    @Nullable
+    @BindView(R.id.li_parent_lay) LinearLayout li_parent_lay;
+
     @NotEmpty
     @Nullable
     @BindView(R.id.et_gender) EditText et_gender;
@@ -137,8 +141,8 @@ public class DeathRegistration_First_Fragment extends Fragment implements
     ArrayList<String> mGenderListList = new ArrayList<>();
     ArrayList<String> mYearsListList = new ArrayList<>();
 
-    List<Districts> mPanchayatsList = new ArrayList<>();
-    List<Districts> mDistrictList = new ArrayList();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mPanchayatsList = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mDistrictList = new ArrayList();
 
 
 
@@ -196,7 +200,8 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                 if(districtid!=0){
                     getPanchayat();
                 }else{
-                    Toast.makeText(getActivity(), "Please select the District!!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please select the District!!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(li_parent_lay,"Please select the District!!",Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -267,7 +272,7 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                             String districtname = jsonObject.getString("DistrictName");
                             Log.e(TAG,jsonObject.getString("DistrictName"));
                             mDistrictsList.add(districtname);
-                            mDistrictList.add(new Districts(districtid,districtname));
+                            mDistrictList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(districtid,districtname));
                         }
                         pd.dismiss();
                         setSpinnerDistrict(mDistrictsList);
@@ -391,7 +396,7 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                             String panchayatName = jsonObject.getString("PanchayatName");
                             Log.e(TAG,jsonObject.getString("PanchayatName"));
                             mPanchayatList.add(panchayatName);
-                            mPanchayatsList.add(new Districts(panchayatid,panchayatName));
+                            mPanchayatsList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(panchayatid,panchayatName));
                         }
                         pd.dismiss();
                         setSpinnerPanchayat(mPanchayatList);
@@ -416,7 +421,8 @@ public class DeathRegistration_First_Fragment extends Fragment implements
 
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+        Snackbar.make(li_parent_lay,"success",Snackbar.LENGTH_SHORT).show();
         sharedPreferenceHelpher.putPersonalInfo(et_district.getText().toString(),
                 et_panchayat.getText().toString(),
                 et_mobileno.getText().toString(),
@@ -428,7 +434,7 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                 et_pincode.getText().toString(),
                 et_per_permanent_address.getText().toString(),
                 et_per_pincode.getText().toString(),
-                et_deathdate.getText().toString(),
+                parseDate(et_deathdate.getText().toString(), "dd/MM/yyyy", "yyyy-MM-dd"),
                 selectedGender,
                 et_name.getText().toString(),
                 et_age.getText().toString(),
@@ -454,8 +460,30 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                 view.requestFocus();
 
             }else{
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Snackbar.make(li_parent_lay,message,Snackbar.LENGTH_SHORT).show();
+
             }
         }
+    }
+    public String parseDate(String date, String givenformat, String resultformat) {
+
+        String result = "";
+        SimpleDateFormat sdf;
+        SimpleDateFormat sdf1;
+
+        try {
+            sdf = new SimpleDateFormat(givenformat);
+            sdf1 = new SimpleDateFormat(resultformat);
+            result = sdf1.format(sdf.parse(date));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        } finally {
+            sdf = null;
+            sdf1 = null;
+        }
+        return result;
     }
 }

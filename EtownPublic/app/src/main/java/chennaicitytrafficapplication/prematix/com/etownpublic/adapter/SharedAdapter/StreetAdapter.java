@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Street_Pojo;
 
-/**
- * Created by admin on 15-09-2017.
- */
-
 public class StreetAdapter extends RecyclerView.Adapter<StreetAdapter.ViewHolder> {
 
     private ArrayList<Street_Pojo> beanList;

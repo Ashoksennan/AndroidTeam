@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,7 +97,7 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
 
     //date
     DateSelect dateObject;
-
+              RelativeLayout rootlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,6 +198,10 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
                     bcs_et_panchayat.setText("");
                 } else {
                     Toast.makeText(BirthCertificateSearch_Activity.this, "Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
+
                 }
             }
         });
@@ -212,6 +218,7 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
 
                     } else {
                         Toast.makeText(BirthCertificateSearch_Activity.this, "Please Select District !", Toast.LENGTH_SHORT).show();
+
                     }
 
                 } else {

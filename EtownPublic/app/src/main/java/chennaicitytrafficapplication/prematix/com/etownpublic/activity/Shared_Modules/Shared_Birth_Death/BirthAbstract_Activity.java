@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -21,8 +22,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -96,7 +97,7 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
     SharedPreferences.Editor editor;
     int PRIVATE_MODE = 0;
     private static final String PREF_NAME = "TypePreference";
-
+     RelativeLayout rootlayout;
     String sPreferenceType, sType;
     Intent intent;
 
@@ -128,7 +129,7 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
         } else if (sPreferenceType.equalsIgnoreCase("Death")) {
             mToolbar.setTitle("Death Abstract");
         }
-
+          rootlayout=(RelativeLayout)findViewById(R.id.rootlayout);
 
         //arraylists
         arrayListDistrict = new ArrayList<>();
@@ -223,7 +224,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                     getDistricts();
                     ba_et_panchayat.setText("");
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -238,16 +241,23 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                         if (Common.isNetworkAvailable(getApplicationContext())) {
                             getPanchayat();
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
                         }
 
 
                     } else {
-                        Toast.makeText(BirthAbstract_Activity.this, "Please Select District !", Toast.LENGTH_SHORT).show();
+
+                        Snackbar.make(rootlayout, "Please Select District !", Snackbar.LENGTH_SHORT).show();
+
+
                     }
 
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+
+
+                    Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -306,10 +316,13 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                             if (sArrayList_DistrictNames.size() > 0) {
                                 setSpinner(sArrayList_DistrictNames);
                             } else {
-                                Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
-                            }
+                                Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
+
+                              }
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
 
                         }
                     } catch (JSONException e) {
@@ -317,8 +330,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                     }
 
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
-                }
+                    Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
+                     }
             }
 
             @Override
@@ -326,15 +340,18 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                 pd.dismiss();
                 if (t instanceof IOException) {
                     errorType = "Timeout";
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check network Connection", Toast.LENGTH_SHORT).show();
+               
+                    Snackbar.make(rootlayout, "Please Check network Connection", Snackbar.LENGTH_SHORT).show();
+
 
                 } else if (t instanceof IllegalStateException) {
                     errorType = "ConversionError";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else {
                     errorType = "Error";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -392,20 +409,23 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                             if (sArrayList_DistrictNames.size() > 0) {
                                 setSpinnerForPanchayat(sArrayList_DistrictNames);
                             } else {
-                                Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
+
                             }
 
 
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
 
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
-                }
+
+                    Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+                   }
 
             }
 
@@ -415,15 +435,18 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                 pd.dismiss();
                 if (t instanceof IOException) {
                     errorType = "Timeout";
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check network Connection", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Please Check network Connection", Snackbar.LENGTH_SHORT).show();
+
 
                 } else if (t instanceof IllegalStateException) {
                     errorType = "ConversionError";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else {
                     errorType = "Error";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -568,7 +591,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                                             }
 
                                         } else {
-                                            Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+
+                                            Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
                                             ba_cd_first_rv.setVisibility(View.GONE);
                                             ba_cd_first_title.setVisibility(View.GONE);
                                             ba_tv_title_change.setVisibility(View.GONE);
@@ -581,8 +606,10 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                                 }
 
                             } else {
-                                Toast.makeText(BirthAbstract_Activity.this, "Something went Wrong !", Toast.LENGTH_SHORT).show();
-                                ba_cd_first_rv.setVisibility(View.GONE);
+
+                                Snackbar.make(rootlayout, "Something went Wrong !", Snackbar.LENGTH_SHORT).show();
+
+                               ba_cd_first_rv.setVisibility(View.GONE);
                                 ba_cd_first_title.setVisibility(View.GONE);
                                 ba_tv_title_change.setVisibility(View.GONE);
                                 ba_cd_birthdetails_rv.setVisibility(View.GONE);
@@ -592,7 +619,8 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                             }
 
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+                           Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
                             ba_cd_first_rv.setVisibility(View.GONE);
                             ba_cd_first_title.setVisibility(View.GONE);
                             ba_tv_title_change.setVisibility(View.GONE);
@@ -614,7 +642,8 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                     }
 
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
                     ba_cd_first_rv.setVisibility(View.GONE);
                     ba_cd_first_title.setVisibility(View.GONE);
                     ba_tv_title_change.setVisibility(View.GONE);
@@ -639,15 +668,18 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                 bcs_cd_total.setVisibility(View.GONE);
                 if (t instanceof IOException) {
                     errorType = "Timeout";
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check network Connection", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Please Check network Connection", Snackbar.LENGTH_SHORT).show();
+
 
                 } else if (t instanceof IllegalStateException) {
                     errorType = "ConversionError";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else {
                     errorType = "Error";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -747,7 +779,10 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                                         bcs_cd_total.setVisibility(View.VISIBLE);
 
                                     } else {
-                                        Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+
+                                        Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
+
                                         ba_cd_first_rv.setVisibility(View.GONE);
                                         ba_cd_first_title.setVisibility(View.GONE);
                                         ba_tv_title_change.setVisibility(View.GONE);
@@ -759,7 +794,8 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                                 }
 
                             } else {
-                                Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
                                 ba_cd_first_rv.setVisibility(View.GONE);
                                 ba_cd_first_title.setVisibility(View.GONE);
                                 ba_tv_title_change.setVisibility(View.GONE);
@@ -770,7 +806,8 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                             }
 
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
                             ba_cd_first_rv.setVisibility(View.GONE);
                             ba_cd_first_title.setVisibility(View.GONE);
                             ba_tv_title_change.setVisibility(View.GONE);
@@ -791,7 +828,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
                     ba_cd_first_rv.setVisibility(View.GONE);
                     ba_cd_first_title.setVisibility(View.GONE);
                     ba_tv_title_change.setVisibility(View.GONE);
@@ -816,15 +855,18 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                 bcs_cd_total.setVisibility(View.GONE);
                 if (t instanceof IOException) {
                     errorType = "Timeout";
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check network Connection", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Please Check network Connection", Snackbar.LENGTH_SHORT).show();
+
 
                 } else if (t instanceof IllegalStateException) {
                     errorType = "ConversionError";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else {
                     errorType = "Error";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -928,7 +970,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
 
                                         }
                                     } else {
-                                        Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+
+                                        Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
                                         ba_cd_first_rv.setVisibility(View.GONE);
                                         ba_cd_first_title.setVisibility(View.GONE);
                                         ba_tv_title_change.setVisibility(View.GONE);
@@ -939,7 +983,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                                 }
 
                             } else {
-                                Toast.makeText(BirthAbstract_Activity.this, "No data found !", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(rootlayout, "No data found !", Snackbar.LENGTH_SHORT).show();
+
+
                                 ba_cd_first_rv.setVisibility(View.GONE);
                                 ba_cd_first_title.setVisibility(View.GONE);
                                 ba_tv_title_change.setVisibility(View.GONE);
@@ -949,7 +995,8 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                             }
 
                         } else {
-                            Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
                             ba_cd_first_rv.setVisibility(View.GONE);
                             ba_cd_first_title.setVisibility(View.GONE);
                             ba_tv_title_change.setVisibility(View.GONE);
@@ -969,7 +1016,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(rootlayout, "Something went wrong !", Snackbar.LENGTH_SHORT).show();
+
                     ba_cd_first_rv.setVisibility(View.GONE);
                     ba_cd_first_title.setVisibility(View.GONE);
                     ba_tv_title_change.setVisibility(View.GONE);
@@ -994,15 +1043,16 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
 
                 if (t instanceof IOException) {
                     errorType = "Timeout";
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check network Connection", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else if (t instanceof IllegalStateException) {
                     errorType = "ConversionError";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
 
                 } else {
                     errorType = "Error";
-                    Toast.makeText(BirthAbstract_Activity.this, errorType, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, errorType, Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -1017,11 +1067,15 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
                 if (Common.isNetworkAvailable(getApplicationContext())) {
                     getYearWiseDatas();
                 } else {
-                    Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+                     Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
                 }
             }
         } else {
-            Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
+
+
         }
 
     }
@@ -1089,7 +1143,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
         if (Common.isNetworkAvailable(getApplicationContext())) {
             getWardWiseDatas();
         } else {
-            Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+
+            Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
         }
 
     }
@@ -1106,7 +1162,9 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
             getBirthDetailsDatas();
 
         } else {
-            Toast.makeText(BirthAbstract_Activity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootlayout, "Please Check your Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
+
         }
     }
 

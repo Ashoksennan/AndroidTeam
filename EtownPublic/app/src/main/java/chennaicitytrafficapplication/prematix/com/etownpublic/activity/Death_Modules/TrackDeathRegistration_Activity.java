@@ -30,7 +30,6 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Death.Trac
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.TrackDeathRegistration_Pojo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,16 +47,13 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
 
     final static String TAG = TrackDeathRegistration_Activity.class.getSimpleName();
 
-    ArrayList<TrackDeathRegistration_Pojo> beanlist = new ArrayList<>();
+    ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.TrackDeathRegistration_Pojo> beanlist =new ArrayList<>();
     @Nullable
-    @BindView(R.id.et_req_no)
-    EditText et_req_no;
+    @BindView(R.id.et_req_no) EditText et_req_no;
     @Nullable
-    @BindView(R.id.et_mob_no)
-    EditText et_mob_no;
+    @BindView(R.id.et_mob_no) EditText et_mob_no;
     @Nullable
-    @BindView(R.id.btn_track)
-    Button btn_track;
+    @BindView(R.id.btn_track) Button btn_track;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,14 +62,15 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
         ButterKnife.bind(this);
         beanlist = new ArrayList<>();
 
-        tbr_rv = findViewById(R.id.tbr_rv);
+        tbr_rv = (RecyclerView)findViewById(R.id.tbr_rv);
 
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
 
         tbr_rv.setLayoutManager(linearLayoutManager);
 
-        if (tbr_rv != null) {
+        if(tbr_rv != null)
+        {
             tbr_rv.setHasFixedSize(true);
         }
 
@@ -81,38 +78,36 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
         btn_track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!et_req_no.getText().toString().isEmpty() || !et_mob_no.getText().toString().isEmpty())
-                    getTrackDetails();
-                else
-                    Toast.makeText(TrackDeathRegistration_Activity.this, "Please Enter Above Request no or mobile no", Toast.LENGTH_SHORT).show();
+                if(!et_req_no.getText().toString().isEmpty() || !et_mob_no.getText().toString().isEmpty())  getTrackDetails();
+                else Toast.makeText(TrackDeathRegistration_Activity.this, "Please Enter Above Request no or mobile no", Toast.LENGTH_SHORT).show();
             }
         });
 //        getTrackDetails();
 
     }
 
-    public void getTrackDetails() {
+    public void getTrackDetails(){
 
         RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofit().create(RetrofitInterface.class);
         final ProgressDialog pd = new ProgressDialog(TrackDeathRegistration_Activity.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-        Call districtresult = retrofitInterface.getTrackingDetails(Common.ACCESS_TOKEN, "Death", et_mob_no.getText().toString(), et_req_no.getText().toString(), "", "", "");
+        Call districtresult = retrofitInterface.getTrackingDetails(Common.ACCESS_TOKEN,"Death",et_mob_no.getText().toString(),et_req_no.getText().toString(),"","","");
         districtresult.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                Log.e("fgd", response.toString());
+                Log.e("fgd",response.toString());
                 String response1 = new Gson().toJson(response.body());
-                Log.e("result", response1);
+                Log.e("result",response1);
                 try {
                     JSONObject records = new JSONObject(response1);
                     JSONArray jsonArray = records.getJSONArray("recordsets");
-                    if (jsonArray.length() > 0) {
+                    if(jsonArray.length()>0){
                         JSONArray trackArray = jsonArray.getJSONArray(0);
-                        if (trackArray.length() > 0) {
-                            for (int i = 0; i < trackArray.length(); i++) {
-                                JSONObject trackObjects = trackArray.getJSONObject(i);
+                        if(trackArray.length()>0){
+                            for(int i=0;i<trackArray.length();i++){
+                                JSONObject trackObjects =trackArray.getJSONObject(i);
 
                              /*   Log.e(TAG,"RequestNo====>"+trackObjects.getString("RequestNo"));
                                 Log.e(TAG,"RequestDate====>"+trackObjects.getString("RequestDate"));
@@ -134,26 +129,26 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
                                 Log.e(TAG,"Age====>"+trackObjects.getString("Age"));
                                 Log.e(TAG,"AgeType====>"+trackObjects.getString("AgeType"));*/
 
-                                beanlist.add(new TrackDeathRegistration_Pojo(trackObjects.getString("RequestNo"), trackObjects.getString("RequestDate"),
-                                        trackObjects.getString("District"), trackObjects.getString("Panchayat"), trackObjects.getString("DeceasedName"),
-                                        trackObjects.getString("DoorNo"), trackObjects.getString("WardNo"), trackObjects.getString("Status"),
-                                        trackObjects.getString("StreetName"), trackObjects.getString("MobileNo"), trackObjects.getString("EmailId"), trackObjects.getString("FatherName"), trackObjects.getString("Gender"),
-                                        trackObjects.getString("DeathPlace"), trackObjects.getString("MotherName"), trackObjects.getString("DOD"), trackObjects.getString("HusbandWifeName"), trackObjects.getString("Age"),
+                                beanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.TrackDeathRegistration_Pojo(trackObjects.getString("RequestNo"),trackObjects.getString("RequestDate"),
+                                        trackObjects.getString("District"),trackObjects.getString("Panchayat"),trackObjects.getString("DeceasedName"),
+                                        trackObjects.getString("DoorNo"),trackObjects.getString("WardNo"),trackObjects.getString("Status"),
+                                        trackObjects.getString("StreetName"),trackObjects.getString("MobileNo"),trackObjects.getString("EmailId"),trackObjects.getString("FatherName"),trackObjects.getString("Gender"),
+                                        trackObjects.getString("DeathPlace"),trackObjects.getString("MotherName"),trackObjects.getString("DOD"),trackObjects.getString("HusbandWifeName"),trackObjects.getString("Age"),
                                         trackObjects.getString("AgeType")));
 
                             }
                             pd.dismiss();
 
-                            Log.e(TAG, "list====>" + beanlist.size());
-                            addAdapter();
+                            Log.e(TAG,"list====>"+beanlist.size());
+                          addAdapter();
 
 
-                        } else {
-                            Toast.makeText(TrackDeathRegistration_Activity.this, "No Data found!!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(TrackDeathRegistration_Activity.this,"No Data found!!",Toast.LENGTH_SHORT).show();
                             pd.dismiss();
                         }
-                    } else {
-                        Toast.makeText(TrackDeathRegistration_Activity.this, "No Data found!!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(TrackDeathRegistration_Activity.this,"No Data found!!",Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
                 } catch (JSONException e) {
@@ -161,17 +156,17 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
                     pd.dismiss();
                 }
             }
-
             @Override
             public void onFailure(Call call, Throwable t) {
                 pd.dismiss();
-                Log.e(TAG, t.toString());
+                Log.e(TAG,t.toString());
             }
         });
     }
 
-    public void addAdapter() {
-        adapter = new TrackDeathRegistrationAdapter(beanlist, getApplicationContext(), TrackDeathRegistration_Activity.this);
+    public void addAdapter()
+    {
+        adapter = new TrackDeathRegistrationAdapter(beanlist,getApplicationContext(),TrackDeathRegistration_Activity.this);
         tbr_rv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -182,80 +177,80 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
     public void getposition(int pos) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrackDeathRegistration_Activity.this);
         View v2 = getLayoutInflater().inflate(R.layout.item_track_death, null);
-        ImageView img_cancel = v2.findViewById(R.id.img_cancel);
-        TextView tv_age = v2.findViewById(R.id.tv_age);
-        TextView tv_req_no = v2.findViewById(R.id.tv_req_no);
-        TextView tv_gender = v2.findViewById(R.id.tv_gender);
-        TextView tv_husband_name = v2.findViewById(R.id.tv_husband_name);
-        TextView tv_diseased_name = v2.findViewById(R.id.tv_diseased_name);
-        TextView tv_father_mob_no = v2.findViewById(R.id.tv_father_mob_no);
-        TextView tv_email = v2.findViewById(R.id.tv_email);
-        TextView tv_birthplace = v2.findViewById(R.id.tv_birthplace);
-        TextView tv_dob = v2.findViewById(R.id.tv_dob);
-        TextView tv_district = v2.findViewById(R.id.tv_district);
-        TextView tv_panchayat = v2.findViewById(R.id.tv_panchayat);
-        TextView tv_status = v2.findViewById(R.id.tv_status);
-        if (!beanlist.get(pos).getmRequestNo().isEmpty()) {
+        ImageView img_cancel =  (ImageView)v2.findViewById(R.id.img_cancel);
+        TextView tv_age =  (TextView)v2.findViewById(R.id.tv_age);
+        TextView tv_req_no =  (TextView)v2.findViewById(R.id.tv_req_no);
+        TextView tv_gender =  (TextView)v2.findViewById(R.id.tv_gender);
+        TextView tv_husband_name =  (TextView)v2.findViewById(R.id.tv_husband_name);
+        TextView tv_diseased_name =  (TextView)v2.findViewById(R.id.tv_diseased_name);
+        TextView tv_father_mob_no =  (TextView)v2.findViewById(R.id.tv_father_mob_no);
+        TextView tv_email =  (TextView)v2.findViewById(R.id.tv_email);
+        TextView tv_birthplace =  (TextView)v2.findViewById(R.id.tv_birthplace);
+        TextView tv_dob =  (TextView)v2.findViewById(R.id.tv_dob);
+        TextView tv_district =  (TextView)v2.findViewById(R.id.tv_district);
+        TextView tv_panchayat =  (TextView)v2.findViewById(R.id.tv_panchayat);
+        TextView tv_status =  (TextView)v2.findViewById(R.id.tv_status);
+        if(!beanlist.get(pos).getmRequestNo().isEmpty()){
             tv_req_no.setText(beanlist.get(pos).getmRequestNo());
-        } else {
+        }else{
             tv_req_no.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmAge().isEmpty()) {
+        if(!beanlist.get(pos).getmAge().isEmpty()){
             tv_age.setText(beanlist.get(pos).getmAge());
-        } else {
+        }else{
             tv_age.setVisibility(View.GONE);
         }
 //        tv_gender.setText(beanlist.get(pos).getGender());
-        if (!beanlist.get(pos).getmGender().isEmpty()) {
+        if(!beanlist.get(pos).getmGender().isEmpty()){
             tv_gender.setText(beanlist.get(pos).getmGender());
-        } else {
+        }else{
             tv_gender.setVisibility(View.GONE);
         }
 //        tv_father_name.setText(beanlist.get(pos).getFatherName());
-        if (!beanlist.get(pos).getmHusbandWifeName().isEmpty()) {
+        if(!beanlist.get(pos).getmHusbandWifeName().isEmpty()){
             tv_husband_name.setText(beanlist.get(pos).getmHusbandWifeName());
-        } else {
+        }else{
             tv_husband_name.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmDeceasedName().isEmpty()) {
+        if(!beanlist.get(pos).getmDeceasedName().isEmpty()){
             tv_diseased_name.setText(beanlist.get(pos).getmDeceasedName());
-        } else {
+        }else{
             tv_diseased_name.setVisibility(View.GONE);
         }
 //        tv_father_mob_no.setText(beanlist.get(pos).getMobileNo());
-        if (!beanlist.get(pos).getmMobileNo().isEmpty()) {
+        if(!beanlist.get(pos).getmMobileNo().isEmpty()){
             tv_father_mob_no.setText(beanlist.get(pos).getmMobileNo());
-        } else {
+        }else{
             tv_father_mob_no.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmEmailId().isEmpty()) {
+        if(!beanlist.get(pos).getmEmailId().isEmpty()){
             tv_email.setText(beanlist.get(pos).getmEmailId());
-        } else {
+        }else{
             tv_email.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmBirthPlace().isEmpty()) {
+        if(!beanlist.get(pos).getmBirthPlace().isEmpty()){
             tv_birthplace.setText(beanlist.get(pos).getmBirthPlace());
-        } else {
+        }else{
             tv_birthplace.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmDOB().isEmpty()) {
+        if(!beanlist.get(pos).getmDOB().isEmpty()){
             tv_dob.setText(beanlist.get(pos).getmDOB());
-        } else {
+        }else{
             tv_dob.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmDistrict().isEmpty()) {
+        if(!beanlist.get(pos).getmDistrict().isEmpty()){
             tv_district.setText(beanlist.get(pos).getmDistrict());
-        } else {
+        }else{
             tv_district.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmPanchayat().isEmpty()) {
+        if(!beanlist.get(pos).getmPanchayat().isEmpty()){
             tv_panchayat.setText(beanlist.get(pos).getmPanchayat());
-        } else {
+        }else{
             tv_panchayat.setVisibility(View.GONE);
         }
-        if (!beanlist.get(pos).getmStatus().isEmpty()) {
+        if(!beanlist.get(pos).getmStatus().isEmpty()){
             tv_status.setText(beanlist.get(pos).getmStatus());
-        } else {
+        }else{
             tv_status.setVisibility(View.GONE);
         }
         img_cancel.setOnClickListener(new View.OnClickListener() {

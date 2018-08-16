@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -100,21 +98,7 @@
             android:name=".activity.ContactUs"
             android:parentActivityName=".HomeActivity" />
 
-        <activity android:name=".activity.Property.PropertyTaxCalculator_Activity"
-            android:parentActivityName=".HomeActivity"/>
-
-        <activity android:name=".activity.Property.NameTransfer"
-            android:parentActivityName=".HomeActivity"/>
-
-        <activity android:name=".activity.Profession.OnlineFiling"
-            android:parentActivityName=".HomeActivity"/>
-
-        <activity android:name=".activity.Profession.TrackOnlineFiling"
-            android:parentActivityName=".HomeActivity"/>
-
-        <activity android:name=".activity.Profession.ViewOnlineFilingTracking"
-            android:parentActivityName=".activity.Profession.TrackOnlineFiling"/>
-
+        <activity android:name=".activity.Property.PropertyTaxCalculator_Activity" android:parentActivityName=".HomeActivity"/>
         <!-- Broadcast receiver declaration in manifest file and make sure to enable it -->
         <receiver
             android:name=".Network_Connection_BroadCast.InternetConnector_Receiver"
