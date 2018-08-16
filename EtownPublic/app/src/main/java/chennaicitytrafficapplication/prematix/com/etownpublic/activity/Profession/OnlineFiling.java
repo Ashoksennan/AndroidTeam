@@ -174,13 +174,7 @@ public class OnlineFiling extends AppCompatActivity {
                 new LinearLayoutManager(OnlineFiling.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewDemand.setLayoutManager(linearLayoutManager1);
 
-        if (Common.isNetworkAvailable(getApplicationContext())) {
-            districtList();
 
-        } else {
-
-            Snackbar.make(rootLayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
-        }
 
 
         if (Common.isNetworkAvailable(getApplicationContext())) {
@@ -448,7 +442,7 @@ public class OnlineFiling extends AppCompatActivity {
                             etFinancialYear.setText(finYear_items.get(0));
 
                         }
-
+                        districtList();
                     }
                     progressDialog.dismiss();
 
