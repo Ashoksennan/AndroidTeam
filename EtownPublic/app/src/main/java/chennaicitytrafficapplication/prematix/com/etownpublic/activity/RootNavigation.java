@@ -17,6 +17,11 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Death_Mod
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Registration;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Track;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.NonTax.NewAssessment;
+<<<<<<< HEAD
+=======
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.OnlineFiling;
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.TrackOnlineFiling;
+>>>>>>> Nagarjun
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.AssessmentSearch;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PaidHistory;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PropertyTaxCalculator_Activity;
@@ -447,6 +452,27 @@ public class RootNavigation extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+        mlinear_OnlineFilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), OnlineFiling.class);
+                startActivity(i);
+            }
+        });
+
+        mlinear_TrackOnlineFilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), TrackOnlineFiling.class);
+                startActivity(i);
+            }
+        });
+
+>>>>>>> Nagarjun
         mlinear_ViewDCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
