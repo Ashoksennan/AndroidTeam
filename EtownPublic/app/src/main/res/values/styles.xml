@@ -133,6 +133,11 @@
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_top</item>
     </style>
+    <style name="pCheckBox" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">@color/pPurple</item>   <!-- normal border color change as you wish -->
+        <item name="colorControlActivated">@color/pPurple</item> <!-- activated color change as you wish -->
+        <item name="android:textColor">#FFFF3F3C</item> <!-- checkbox text color -->
+    </style>
 
 
 

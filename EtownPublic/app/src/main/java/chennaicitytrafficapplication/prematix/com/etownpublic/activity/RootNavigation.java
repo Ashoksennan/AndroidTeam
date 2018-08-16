@@ -17,12 +17,10 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Death_Mod
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Registration;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Grievances.Grievances_Track;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.NonTax.NewAssessment;
-<<<<<<< HEAD
-=======
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.OnlineFiling;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Profession.TrackOnlineFiling;
->>>>>>> Nagarjun
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.AssessmentSearch;
+import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.NameTransfer;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PaidHistory;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Property.PropertyTaxCalculator_Activity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Birth_Death.BirthAbstract_Activity;
@@ -232,7 +230,42 @@ public class RootNavigation extends AppCompatActivity {
 
             }
         });
+        mlinear_TrackOnlineFilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Common.isNetworkAvailable(getApplicationContext())) {
 
+                    Intent i = new Intent(getApplicationContext(), TrackOnlineFiling.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.anim_slide_out_left,
+                            R.anim.leftanim);
+
+                } else
+                    Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
+
+
+            }
+        });
+
+        mlinear_OnlineFilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Common.isNetworkAvailable(getApplicationContext())) {
+
+                    Intent i = new Intent(getApplicationContext(), OnlineFiling.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.anim_slide_out_left,
+                            R.anim.leftanim);
+
+                } else
+                    Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
+
+
+
+            }
+        });
 
         mlinear_birth_deathRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -445,6 +478,12 @@ public class RootNavigation extends AppCompatActivity {
 
                 if (Common.isNetworkAvailable(getApplicationContext())) {
 
+
+                    Intent nametransfer_intent=new Intent(RootNavigation.this, NameTransfer.class);
+                    startActivity(nametransfer_intent);
+                    overridePendingTransition(R.anim.anim_slide_out_left,
+                            R.anim.leftanim);
+
                 } else
                     Snackbar.make(rootlayout, "No Internet Connection !", Snackbar.LENGTH_SHORT).show();
 
@@ -452,27 +491,6 @@ public class RootNavigation extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-=======
-        mlinear_OnlineFilling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(getApplicationContext(), OnlineFiling.class);
-                startActivity(i);
-            }
-        });
-
-        mlinear_TrackOnlineFilling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(getApplicationContext(), TrackOnlineFiling.class);
-                startActivity(i);
-            }
-        });
-
->>>>>>> Nagarjun
         mlinear_ViewDCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

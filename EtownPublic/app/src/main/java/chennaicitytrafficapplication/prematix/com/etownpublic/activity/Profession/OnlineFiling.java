@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -47,15 +46,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Districts;
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts;
 import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Organisations;
 import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Panchayats;
 import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Profession_Tax.OnlineFilingDemandEntity;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
-import chennaicitytrafficapplication.prematix.com.etownpublic.activity.Shared_Modules.Shared_Common_All_Tax.ViewDcb;
-import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.OrganisationAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax.OnlineFilingDemandAdapter;
+import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax.OrganisationAdapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.listener.RecyclerClickListener;
 import dmax.dialog.SpotsDialog;
@@ -93,7 +91,7 @@ public class OnlineFiling extends AppCompatActivity {
     ArrayList<String> panchayat_items=new ArrayList<>();
     ArrayList<String> finYear_items=new ArrayList<>();
     ArrayList<OnlineFilingDemandEntity> onlineFilingDemandEntities=new ArrayList<>();
-    ArrayList<Districts> districts=new ArrayList<>();
+    ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts> districts=new ArrayList<>();
     ArrayList<Panchayats> panchayats=new ArrayList<>();
     ArrayList<Organisations> organisations=new ArrayList<>();
 
@@ -197,21 +195,18 @@ public class OnlineFiling extends AppCompatActivity {
 //        finYear_items.add("2017-2018");
 
         spinnerDialogPanchayat=new SpinnerDialog(OnlineFiling.this,panchayat_items,"Select or Search Panchayat","Close");// With No Animation
-        spinnerDialogPanchayat=new SpinnerDialog(OnlineFiling.this,panchayat_items,"Select or Search Panchayat", R.style.DialogAnimations_SmileWindow,"Close");// With 	Animation
-
+      
 
         spinnerDialogDistrict=new SpinnerDialog(OnlineFiling.this,distict_items,"Select or Search District","Close");// With No Animation
-        spinnerDialogDistrict=new SpinnerDialog(OnlineFiling.this,distict_items,"Select or Search District", R.style.DialogAnimations_SmileWindow,"Close");// With 	Animation
 
         spinnerDialogFinYear=new SpinnerDialog(OnlineFiling.this,finYear_items,"Select or Search FinYear","Close");// With No Animation
-        spinnerDialogFinYear=new SpinnerDialog(OnlineFiling.this,finYear_items,"Select or Search FinYear", R.style.DialogAnimations_SmileWindow,"Close");// With 	Animation
 
         spinnerDialogDistrict.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
                 etDistrict.setText(item);
                 districtName = item;
-                districtId = districts.get(position).getDistrictId();
+                districtId = districts.get(position).getmDistrictId();
 
                 etPanchayat.setText("");
                 etOrgName.setText("");
@@ -584,7 +579,7 @@ public class OnlineFiling extends AppCompatActivity {
 
                                 distict_items.add(districtName);
 
-                                districts.add(new Districts(districtName,districtId));
+                                districts.add(new Districts(districtId,districtName));
                                 progressDialog.dismiss();
 
                             }

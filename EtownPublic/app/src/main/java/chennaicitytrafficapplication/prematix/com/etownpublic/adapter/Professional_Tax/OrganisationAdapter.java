@@ -1,4 +1,4 @@
-package chennaicitytrafficapplication.prematix.com.etownpublic.adapter;
+package chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Professional_Tax;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -26,13 +26,13 @@ public class OrganisationAdapter extends RecyclerView.Adapter<OrganisationAdapte
     }
     @NonNull
     @Override
-    public OrganisationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.org_item_view,parent,false);
-        return new OrganisationAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrganisationAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Organisations organisationsList = orgList.get(position);
 
         holder.tvOrgName.setText(Html.fromHtml(organisationsList.getorgName()));

@@ -28,13 +28,13 @@ public class TrackOnlineFilingAdapter extends RecyclerView.Adapter<TrackOnlineFi
     }
     @NonNull
     @Override
-    public TrackOnlineFilingAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.track_onlinefiling_item_view,parent,false);
-        return new TrackOnlineFilingAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TrackOnlineFilingAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final TrackOnlineFilingEntity onlineFilingEntity = trackList.get(position);
 
         holder.tvRequestNo.setText(Html.fromHtml("<b>Request No : </b> " +onlineFilingEntity.getReqNo()));

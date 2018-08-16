@@ -15,11 +15,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInstance;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.RetrofitInterface;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
 import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StreetBean;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;

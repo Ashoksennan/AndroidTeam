@@ -23,14 +23,8 @@ public class Common {
 
   public static String API_NEW_TRACK_ASSESSMENTORCONNECTION=baseUrl+"EPSTrackingRequest?";
 
+  public static String GET_ASSESSMENT_PROP=baseUrl+"EPSTaxBalancePaymentDetails?Type=PSearch&TaxNo=";
 
-
-  public static String API_PROPERTYTAXCALCULATION=baseUrl+"EPSPropertyTaxCalcuation?";
-  public static String API_PROPERTYTAXMASTERDETAILS=baseUrl+"EPSTaxMasterDetails?";
-
-
-<<<<<<< HEAD
-=======
   public static String  uploadUrl="http://192.168.1.11:2020/getdata/";
 
   public static String API_ORGANISATIONS=baseUrl+"EPSTaxMasterDetails?Type=Organization&Input=&District=";
@@ -40,7 +34,11 @@ public class Common {
   public static String API_ONLINE_FILING_SAVE=baseUrl+"EPSProfessionOnline?District=";
 
   public static String API_TRACKNEWASSESSMENT=baseUrl+"EPSTrackingRequest?";
->>>>>>> Nagarjun
+
+  public static String API_PROPERTYTAXCALCULATION=baseUrl+"EPSPropertyTaxCalcuation?";
+  public static String API_PROPERTYTAXMASTERDETAILS=baseUrl+"EPSTaxMasterDetails?";
+
+
 
   public static boolean isNetworkAvailable(final Context context) {
     final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

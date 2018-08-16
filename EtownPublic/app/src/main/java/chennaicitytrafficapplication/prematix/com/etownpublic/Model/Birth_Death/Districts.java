@@ -1,4 +1,4 @@
-package chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death;
+package chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death;
 
 /**
  * Created by Admin on 8/3/2018.

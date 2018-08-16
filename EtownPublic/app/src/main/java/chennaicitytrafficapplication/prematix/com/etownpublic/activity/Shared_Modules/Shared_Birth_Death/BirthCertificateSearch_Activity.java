@@ -35,7 +35,6 @@ import java.util.ArrayList;
 
 import chennaicitytrafficapplication.prematix.com.etownpublic.BuildConfig;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
-import chennaicitytrafficapplication.prematix.com.etownpublic.activity.RootNavigation;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.SharedAdapter.BirthCertificateSearch_Adapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.SharedAdapter.DeathCertificateSearch_Adapter;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
@@ -103,12 +102,13 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_birth_certificate_search);
+        mToolbar = findViewById(R.id.bcs_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         //toolbar
-        mToolbar = findViewById(R.id.bcs_toolbar);
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
-        setSupportActionBar(mToolbar);
 
 
         intent = getIntent();
@@ -156,9 +156,13 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
         if (sPreferenceType.equalsIgnoreCase("Birth")) {
             mToolbar.setTitle("Birth Certificate Search");
             bcs_et_dob_layout.setHint("Date of Birth");
+            getSupportActionBar().setTitle("Birth Certificate Search");
+
         } else if (sPreferenceType.equalsIgnoreCase("Death")) {
             mToolbar.setTitle("Death Certificate Search");
             bcs_et_dob_layout.setHint("Date of Death");
+            getSupportActionBar().setTitle("Death Certificate Search");
+
         }
 
 
@@ -180,13 +184,7 @@ public class BirthCertificateSearch_Activity extends AppCompatActivity implement
 
         //-------
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent ik = new Intent(BirthCertificateSearch_Activity.this, RootNavigation.class);
-                startActivity(ik);
-            }
-        });
+
 
 
         bcs_et_district.setOnClickListener(new View.OnClickListener() {

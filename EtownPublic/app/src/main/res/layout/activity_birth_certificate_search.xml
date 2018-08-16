@@ -11,13 +11,16 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/bcs_toolbar"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="Birth Certificate Search"
-        app:titleTextAppearance="@style/Toolbar_18sp"
-        app:titleTextColor="@color/white">
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Tax"
+        app:titleTextAppearance="@style/TextAppearance.TitleFont"
+        app:titleTextColor="@color/white"
+        >
 
 
     </android.support.v7.widget.Toolbar>

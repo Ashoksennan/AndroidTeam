@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,11 +42,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Districts;
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts;
 import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Panchayats;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.VolleySingleton.AppSingleton;
 import chennaicitytrafficapplication.prematix.com.etownpublic.common.Common;
+import chennaicitytrafficapplication.prematix.com.etownpublic.common.Service;
 import dmax.dialog.SpotsDialog;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
@@ -56,12 +56,11 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
-import chennaicitytrafficapplication.prematix.com.etownpublic.common.Service;
+
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.ACCESS_TOKEN;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_DISTRICT_DETAILS;
 import static chennaicitytrafficapplication.prematix.com.etownpublic.common.Common.API_TOWNPANCHAYAT;
@@ -81,7 +80,7 @@ public class NameTransfer extends AppCompatActivity {
     ArrayList<String> distict_items=new ArrayList<>();
     ArrayList<String> panchayat_items=new ArrayList<>();
 
-    ArrayList<Districts> districts=new ArrayList<>();
+    ArrayList<chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts> districts=new ArrayList<>();
     ArrayList<Panchayats> panchayats=new ArrayList<>();
 
     //Strings
@@ -174,7 +173,7 @@ public class NameTransfer extends AppCompatActivity {
             public void onClick(String item, int position) {
                 etDistrict.setText(item);
                 districtName = item;
-                districtId = districts.get(position).getDistrictId();
+                districtId = districts.get(position).getmDistrictId();
 
                 etPanchayat.setText("");
                 panchayatList(districtId);
@@ -316,7 +315,7 @@ public class NameTransfer extends AppCompatActivity {
 
                                 distict_items.add(districtName);
 
-                                districts.add(new Districts(districtName,districtId));
+                                districts.add(new Districts(districtId,districtName));
                                 progressDialog.dismiss();
 
                             }
@@ -556,7 +555,7 @@ public class NameTransfer extends AppCompatActivity {
         dialog.setMessage("uploading");
         dialog.show();
 
-        retrofit2.Call<okhttp3.ResponseBody> req = service.postImage(body, name);
+        Call<ResponseBody> req = service.postImage(body, name);
         req.enqueue(new Callback<ResponseBody>() {
 
             @Override

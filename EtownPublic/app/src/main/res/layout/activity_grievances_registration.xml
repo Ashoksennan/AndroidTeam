@@ -6,18 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/li_parent_lay"
     android:background="@drawable/background"
    >
     <android.support.v7.widget.Toolbar
-        android:id="@+id/nontax_newassessment_toolbar"
+        android:id="@+id/grievance_track_toolbar"
         android:layout_width="match_parent"
-        app:title="Track Grievances"
-        app:titleTextColor="@color/white"
         android:layout_height="?attr/actionBarSize"
-      
         android:background="?attr/colorPrimary"
-
         app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Tax"
+        app:titleTextAppearance="@style/TextAppearance.TitleFont"
+        app:titleTextColor="@color/white"
         />
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

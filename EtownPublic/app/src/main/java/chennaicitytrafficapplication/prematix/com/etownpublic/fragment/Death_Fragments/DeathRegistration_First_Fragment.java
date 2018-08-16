@@ -141,8 +141,8 @@ public class DeathRegistration_First_Fragment extends Fragment implements
     ArrayList<String> mGenderListList = new ArrayList<>();
     ArrayList<String> mYearsListList = new ArrayList<>();
 
-    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mPanchayatsList = new ArrayList<>();
-    List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> mDistrictList = new ArrayList();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts> mPanchayatsList = new ArrayList<>();
+    List<chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts> mDistrictList = new ArrayList();
 
 
 
@@ -272,7 +272,7 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                             String districtname = jsonObject.getString("DistrictName");
                             Log.e(TAG,jsonObject.getString("DistrictName"));
                             mDistrictsList.add(districtname);
-                            mDistrictList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(districtid,districtname));
+                            mDistrictList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts(districtid,districtname));
                         }
                         pd.dismiss();
                         setSpinnerDistrict(mDistrictsList);
@@ -396,7 +396,7 @@ public class DeathRegistration_First_Fragment extends Fragment implements
                             String panchayatName = jsonObject.getString("PanchayatName");
                             Log.e(TAG,jsonObject.getString("PanchayatName"));
                             mPanchayatList.add(panchayatName);
-                            mPanchayatsList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(panchayatid,panchayatName));
+                            mPanchayatsList.add(new chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts(panchayatid,panchayatName));
                         }
                         pd.dismiss();
                         setSpinnerPanchayat(mPanchayatList);
@@ -422,7 +422,6 @@ public class DeathRegistration_First_Fragment extends Fragment implements
     @Override
     public void onValidationSucceeded() {
 //        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
-        Snackbar.make(li_parent_lay,"success",Snackbar.LENGTH_SHORT).show();
         sharedPreferenceHelpher.putPersonalInfo(et_district.getText().toString(),
                 et_panchayat.getText().toString(),
                 et_mobileno.getText().toString(),

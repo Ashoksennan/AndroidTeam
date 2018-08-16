@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,13 +18,16 @@ import chennaicitytrafficapplication.prematix.com.etownpublic.common.DateSelect;
 public class Grievances_Track extends AppCompatActivity {
 
     @Nullable
-    @BindView(R.id.nontax_newassessment_toolbar)
-    Toolbar nontax_newassessment_toolbar;
+    @BindView(R.id.grievance_track_toolbar)
+    Toolbar grievance_track_toolbar;
 
 
     @Nullable
     @BindView(R.id.et_grvno)
     EditText et_grvno;
+    @Nullable
+    @BindView(R.id.li_parent_lay)
+    LinearLayout li_parent_lay;
 
 
     @Nullable
@@ -45,18 +49,19 @@ public class Grievances_Track extends AppCompatActivity {
     GrievancesTrackHelpher grievancesTrackHelpher;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grievances_registration);
         ButterKnife.bind(this);
-        setSupportActionBar(nontax_newassessment_toolbar);
+        setSupportActionBar(grievance_track_toolbar);
+        grievance_track_toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Object creations
         dateSelect = new DateSelect(Grievances_Track.this);
-        grievancesTrackHelpher = GrievancesTrackHelpher.getInstance(Grievances_Track.this);
+        grievancesTrackHelpher = GrievancesTrackHelpher.getInstance(Grievances_Track.this,li_parent_lay);
         et_fromdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,19 +76,21 @@ public class Grievances_Track extends AppCompatActivity {
         });
 
 
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!et_fromdate.getText().toString().isEmpty() && !et_todate.getText().toString().isEmpty()) {
-                    if (grievancesTrackHelpher.checkDate(et_fromdate.getText().toString(), et_todate.getText().toString())) {
-                        grievancesTrackHelpher.getGrievancesByDate(et_fromdate.getText().toString(), et_todate.getText().toString(), et_grvno.getText().toString());
+                if(!et_fromdate.getText().toString().isEmpty() && !et_todate.getText().toString().isEmpty()){
+                    if(grievancesTrackHelpher.checkDate(et_fromdate.getText().toString(),et_todate.getText().toString())){
+                        grievancesTrackHelpher.getGrievancesByDate(et_fromdate.getText().toString(),et_todate.getText().toString(),et_grvno.getText().toString());
                     }
-                } else {
-                    grievancesTrackHelpher.getGrievancesByDate(et_fromdate.getText().toString(), et_todate.getText().toString(), et_grvno.getText().toString());
+                } else{
+                    grievancesTrackHelpher.getGrievancesByDate(et_fromdate.getText().toString(),et_todate.getText().toString(),et_grvno.getText().toString());
                 }
 
             }
         });
+
 
 
     }

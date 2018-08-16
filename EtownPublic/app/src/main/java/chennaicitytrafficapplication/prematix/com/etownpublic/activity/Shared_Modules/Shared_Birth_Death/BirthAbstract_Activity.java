@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -97,7 +96,7 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
     SharedPreferences.Editor editor;
     int PRIVATE_MODE = 0;
     private static final String PREF_NAME = "TypePreference";
-     RelativeLayout rootlayout;
+     LinearLayout rootlayout;
     String sPreferenceType, sType;
     Intent intent;
 
@@ -111,6 +110,10 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_birth_abstract);
+        mToolbar =(Toolbar) findViewById(R.id.ba_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         intent = getIntent();
 
@@ -120,16 +123,15 @@ public class BirthAbstract_Activity extends AppCompatActivity implements BirthAb
             sPreferenceType = intent.getStringExtra("Tax_Type");
 
         }
-        mToolbar = findViewById(R.id.ba_toolbar);
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
-        setSupportActionBar(mToolbar);
 
         if (sPreferenceType.equalsIgnoreCase("Birth")) {
-            mToolbar.setTitle("Birth Abstract");
+           getSupportActionBar().setTitle("Birth Abstract");
+
         } else if (sPreferenceType.equalsIgnoreCase("Death")) {
-            mToolbar.setTitle("Death Abstract");
+            getSupportActionBar().setTitle("Death Abstract");
+
         }
-          rootlayout=(RelativeLayout)findViewById(R.id.rootlayout);
+          rootlayout=(LinearLayout)findViewById(R.id.rootlayout);
 
         //arraylists
         arrayListDistrict = new ArrayList<>();

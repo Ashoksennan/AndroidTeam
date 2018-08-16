@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.badoualy.stepperindicator.StepperIndicator;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
 import chennaicitytrafficapplication.prematix.com.etownpublic.adapter.Birth.BirthRegistration_PagerAdapter;
@@ -21,18 +20,19 @@ public class BirthRegistration_Activity extends AppCompatActivity {
     StepperIndicator birth_registration_indicator;
     public static ViewPager birth_registration_pager;
     BirthRegistration_PagerAdapter br_pagerAdapter;
-    @Nullable
-    @BindView(R.id.birth_registration_toolbar) Toolbar birth_registration_toolbar;
+  Toolbar birth_registration_toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setContentView(R.layout.activity_birthregistration);
-
+        birth_registration_toolbar=(Toolbar)findViewById(R.id.birth_registration_toolbar);
         setSupportActionBar(birth_registration_toolbar);
-        birth_registration_toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.arrow_back));
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.Birth_apply_registration);
 
         //id's
         birth_registration_pager = (ViewPager) findViewById(R.id.birth_registration_pager);

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,7 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
     @BindView(R.id.et_mob_no) EditText et_mob_no;
     @Nullable
     @BindView(R.id.btn_track) Button btn_track;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,11 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
         setContentView(R.layout.activity_track_death_registration);
         ButterKnife.bind(this);
         beanlist = new ArrayList<>();
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.Death_track_death_registration);
 
         tbr_rv = (RecyclerView)findViewById(R.id.tbr_rv);
 
@@ -129,12 +136,12 @@ public class TrackDeathRegistration_Activity extends AppCompatActivity implement
                                 Log.e(TAG,"Age====>"+trackObjects.getString("Age"));
                                 Log.e(TAG,"AgeType====>"+trackObjects.getString("AgeType"));*/
 
-                                beanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.TrackDeathRegistration_Pojo(trackObjects.getString("RequestNo"),trackObjects.getString("RequestDate"),
-                                        trackObjects.getString("District"),trackObjects.getString("Panchayat"),trackObjects.getString("DeceasedName"),
-                                        trackObjects.getString("DoorNo"),trackObjects.getString("WardNo"),trackObjects.getString("Status"),
-                                        trackObjects.getString("StreetName"),trackObjects.getString("MobileNo"),trackObjects.getString("EmailId"),trackObjects.getString("FatherName"),trackObjects.getString("Gender"),
-                                        trackObjects.getString("DeathPlace"),trackObjects.getString("MotherName"),trackObjects.getString("DOD"),trackObjects.getString("HusbandWifeName"),trackObjects.getString("Age"),
-                                        trackObjects.getString("AgeType")));
+                                beanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.TrackDeathRegistration_Pojo(trackObjects.optString("RequestNo"),trackObjects.optString("RequestDate"),
+                                        trackObjects.optString("District"),trackObjects.optString("Panchayat"),trackObjects.optString("DeceasedName"),
+                                        trackObjects.optString("DoorNo"),trackObjects.optString("WardNo"),trackObjects.optString("Status"),
+                                        trackObjects.optString("StreetName"),trackObjects.optString("MobileNo"),trackObjects.optString("EmailId"),trackObjects.optString("FatherName"),trackObjects.optString("Gender"),
+                                        trackObjects.optString("DeathPlace"),trackObjects.optString("MotherName"),trackObjects.optString("DOD"),trackObjects.optString("HusbandWifeName"),trackObjects.optString("Age"),
+                                        trackObjects.optString("AgeType")));
 
                             }
                             pd.dismiss();

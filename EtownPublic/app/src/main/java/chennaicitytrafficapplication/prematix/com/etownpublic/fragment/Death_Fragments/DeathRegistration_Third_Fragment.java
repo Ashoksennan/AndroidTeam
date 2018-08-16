@@ -150,7 +150,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
 
     //Bean declarations
     public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.StateBean> stateBeanlist = new ArrayList<>();
-    public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts> stateDistrictBeanlist = new ArrayList<>();
+    public List<chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts> stateDistrictBeanlist = new ArrayList<>();
     public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Town> townBeanlist = new ArrayList<>();
     public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.RelegionBean> religionBeanlist = new ArrayList<>();
     public List<chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.EducationBean> educationBeanlist = new ArrayList<>();
@@ -721,7 +721,7 @@ public class DeathRegistration_Third_Fragment extends Fragment implements Valida
                         if(districtArray.length()>0){
                             for(int i=0;i<districtArray.length();i++){
                                 JSONObject streetObjects = districtArray.getJSONObject(i);
-                                stateDistrictBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
+                                stateDistrictBeanlist.add(new chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts(streetObjects.getInt("DistrictCode"),streetObjects.getString("DistrictName")));
                                 stateDistrictstringlist.add(streetObjects.getString("DistrictName"));
                             }
                             pd.dismiss();

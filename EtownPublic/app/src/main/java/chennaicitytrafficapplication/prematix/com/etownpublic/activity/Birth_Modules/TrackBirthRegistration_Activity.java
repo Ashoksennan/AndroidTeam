@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class TrackBirthRegistration_Activity extends AppCompatActivity implement
     TrackBirthRegistration_Adapter adapter;
     RecyclerView tbr_rv;
     AlertDialog dialogBirthDetails;
+    Toolbar toolbar;
 
     final static String TAG = TrackBirthRegistration_Activity.class.getSimpleName();
 
@@ -62,6 +64,13 @@ public class TrackBirthRegistration_Activity extends AppCompatActivity implement
         setContentView(R.layout.activity_track_birth_registration);
         ButterKnife.bind(this);
         beanlist = new ArrayList<>();
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.Birth_track_registration);
+
 
         tbr_rv = (RecyclerView)findViewById(R.id.tbr_rv);
 

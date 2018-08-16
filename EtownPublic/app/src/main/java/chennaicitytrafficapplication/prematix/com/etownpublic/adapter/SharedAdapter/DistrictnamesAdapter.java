@@ -13,8 +13,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import chennaicitytrafficapplication.prematix.com.etownpublic.Model.Birth_Death.Districts;
 import chennaicitytrafficapplication.prematix.com.etownpublic.R;
-import chennaicitytrafficapplication.prematix.com.etownpublic.model.Birth_Death.Districts;
 
 /**
  * Created by Admin on 8/3/2018.
